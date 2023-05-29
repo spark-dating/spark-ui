@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TextInput, Button, TouchableOpacity, StyleSheet} from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import { viewStyles } from '../../../../styles';
+import { viewStyles, commonStyles } from '../../../../styles';
 
 
 
@@ -13,7 +13,8 @@ const LoginScreen = ({ navigation }) => {
           navigation.goBack()
         }}
         activeOpacity={0.8}
-        style={viewStyles.arrow}
+        style={commonStyles.arrow}
+        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
       >
         <AntDesign name="arrowleft" size={30} color="black" />
       </TouchableOpacity>

@@ -30,7 +30,8 @@
     "react-native-vector-icons": "^9.2.0",
     "react-native-web": "~0.18.10",
     "expo-blur": "~12.2.2",
-    "expo-haptics": "~12.2.1"
+    "expo-haptics": "~12.2.1",
+    "react-native-svg": "13.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

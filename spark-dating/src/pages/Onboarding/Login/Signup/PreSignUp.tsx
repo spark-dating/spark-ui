@@ -1,9 +1,9 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import IconsContainer from '../../../../components/Redirects/IconsContainer';
 import PrimaryButton from '../../../../components/Buttons/PrimaryButton';
 import { AntDesign } from '@expo/vector-icons';
-import { viewStyles, textStyles } from '../../../../styles';
+import { viewStyles, textStyles, commonStyles } from '../../../../styles';
 
 import {
   useFonts,
@@ -25,21 +25,26 @@ const SignUpPreScreen = ({ navigation }) => {
           navigation.goBack()
         }}
         activeOpacity={0.8}
-        style={viewStyles.arrow}
+        hitSlop={{top: 10, bottom: 10, left: 10, right: 10}}
+        style={commonStyles.arrow}
       >
         <AntDesign name="arrowleft" size={30} color="black" />
       </TouchableOpacity>
-      <View style={{...viewStyles.topView, width: '70%'}}>
+      <View style={{...viewStyles.topView}}>
+      <Image
+            tintColor="black"
+            source={require("spark-dating/assets/sparkblack.png")}
+            style={styles.icon}/>
         <Text style={textStyles.header}>Sign up</Text>
         <Text style={textStyles.subHeader}>
           Sign up with a social media account or your email address.
         </Text>
-        <View style = {{marginTop: 200}}>
-        <IconsContainer dark={true} style={{marginTop: 80}}/>
-        <DividerBlack style={{marginTop: 30}}/>
+        {/* <View style = {{marginTop: 200}}> */}
         </View>
-      </View>
+      {/* </View> */}
       <View style={viewStyles.bottomView}>
+        <IconsContainer dark={true} style={{marginTop: 80}}/>
+        <DividerBlack style={{marginTop: 30, paddingBottom: 21, width: '80%'}}/>
         <PrimaryButton
           onPress={() => navigation.navigate("Signup")}
         >
@@ -55,39 +60,13 @@ const SignUpPreScreen = ({ navigation }) => {
 
 export default SignUpPreScreen;
 
-// const styles = StyleSheet.create({
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: 'transparent',
-  //   alignItems: 'center',
-  //   justifyContent: 'space-between',
-  // },
-  // topView: {
-  //   justifyContent: 'center',
-  //   width: '90%',
-  //   paddingTop: 140, 
-  // },
-  // bottomView: {
-  //   width: '100%',
-  //   alignItems: 'center',
-  //   marginBottom: 70,
-  // },
-//   subHeader: {
-//     color: '#797C7B',
-//     fontSize: 18,
-//     lineHeight: 26,
-//     fontFamily: 'OpenSans_400Regular',
-//     marginTop: 18,
-//   },
-//   header: {
-//     color: 'black',
-//     fontSize: 64,
-//     fontFamily: 'OpenSans_400Regular',
-//     marginTop: 18,
-//   },
-//   text: {
-//     color: 'black',
-//     fontSize: 14,
-//     fontFamily: 'OpenSans_400Regular',
-//   },
-// });
+const styles = StyleSheet.create({
+  icon : {
+    width: 50,
+    height: 50,
+    zIndex: 1,
+    alignSelf: 'center',
+    marginTop: -20,
+    marginBottom: 20,
+  }
+})

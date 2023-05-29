@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
+import * as Haptics from 'expo-haptics';
+
 
 const CircleIcon = ({ children }) => {
   return (
@@ -10,27 +12,34 @@ const CircleIcon = ({ children }) => {
   );
 };
 
+
 const IconsContainer = ({style, dark}) => {
+
+  const onPress = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    // add logic here for redirect
+  };
+  
 
   const color = dark ? 'black' : 'white';
 
   return (
     <View style={[styles.container, style]}>
-      <CircleIcon>
-        <TouchableOpacity activeOpacity={0.8}>
+      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+        <CircleIcon>
           <FontAwesome name="facebook" size={24} color={color} />
-        </TouchableOpacity>
-      </CircleIcon>
-      <CircleIcon>
-      <TouchableOpacity activeOpacity={0.8}>
+        </CircleIcon>
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+        <CircleIcon>
           <AntDesign name="google" size={24} color={color} />
-        </TouchableOpacity>
-      </CircleIcon>
-      <CircleIcon>
-      <TouchableOpacity activeOpacity={0.8}>
+        </CircleIcon>
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+        <CircleIcon>
           <Ionicons name="logo-apple" size={24} color={color} />
-        </TouchableOpacity>
-      </CircleIcon>
+        </CircleIcon>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -40,6 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    gap: 15,
   },
   circle: {
     width: 70,
