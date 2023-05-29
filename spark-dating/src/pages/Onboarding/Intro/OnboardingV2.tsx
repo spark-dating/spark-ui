@@ -22,8 +22,9 @@ const OnboardingV2 = ({ navigation }) => {
   const [typewrittenText, setTypewrittenText] = useState('');
   const [typewrittenTextBold, setTypewrittenTextBold] = useState('');
   const [displaySubHeader, setDisplaySubHeader] = useState(false);
-  const [index, setIndex] = useState(0);
   const [navigationAway, setNavigationAway] = useState(false);
+  const [initialRender, setInitialRender] = useState(true);
+
 
   useEffect(() => {
     const text = 'Experience the ';
@@ -43,7 +44,7 @@ const OnboardingV2 = ({ navigation }) => {
       } else {
         clearInterval(typingTimer);
         setDisplaySubHeader(true);
-        if (!navigationAway) {
+        if (!navigationAway && initialRender) {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         }
         clearInterval(hapticTimer);  // clear hapticTimer when typing is complete
@@ -51,7 +52,7 @@ const OnboardingV2 = ({ navigation }) => {
     }, 100);
   
     const hapticTimer = setInterval(() => {
-      if (!navigationAway) {
+      if (!navigationAway && initialRender) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
       } else {
         clearInterval(hapticTimer);
@@ -61,6 +62,7 @@ const OnboardingV2 = ({ navigation }) => {
     return () => {
       clearInterval(typingTimer);
       clearInterval(hapticTimer);
+      setInitialRender(false);
     };
   }, [navigationAway]);
   
