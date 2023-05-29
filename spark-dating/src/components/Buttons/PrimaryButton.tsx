@@ -1,5 +1,6 @@
 import React, { FC } from 'react';
-import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle } from 'react-native';
+import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle, TouchableHighlight } from 'react-native';
+import * as Haptics from 'expo-haptics';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -24,10 +25,17 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress, style}) => {
     return <Text>Loading...</Text>;
   }
 
+  const pressHandler = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    onPress();
+  };
+  
+
+
   return (
-    <TouchableOpacity style={[styles.button, style]} activeOpacity={0.8} onPress={onPress}>
+    <TouchableHighlight underlayColor={'#1B5F56'} style={[styles.button, style]} activeOpacity={0.8} onPress={pressHandler}>
       <Text style={styles.buttonText}>{children}</Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
 

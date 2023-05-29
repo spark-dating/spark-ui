@@ -3,12 +3,15 @@ import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
 import IconsContainer from '../../../components/Redirects/IconsContainer';
 import DividerWhite from '../../../components/Visual/DividerWhite';
-import { StatusBar } from 'react-native';
+import { StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
+import * as Haptics from 'expo-haptics';
+import { viewStyles, textStyles } from '../../../styles';
 import {
   useFonts,
   OpenSans_400Regular,
   OpenSans_700Bold,
 } from '@expo-google-fonts/open-sans';
+
 
 const OnboardingV2 = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
@@ -20,23 +23,29 @@ const OnboardingV2 = ({ navigation }) => {
     return <Text>Loading...</Text>;
   }
 
+  const loginRedirect = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    navigation.navigate("Login");
+  };
+
+
   return (
-    
     <ImageBackground
       source={require("spark-dating/assets/backgrounds/Onboardingv2.jpg")}
       style={styles.background}
     >
       <StatusBar barStyle="light-content" />
-      <View style={styles.container}>
-        <View style={styles.topView}>
+      <View style={viewStyles.container}>
+        <View style={viewStyles.topView}>
           <Text
             style={[
-              styles.text,
+              styles.textWhiteBold,
               {
                 display: "flex",
                 alignSelf: "center",
                 marginTop: -40,
                 marginBottom: 40,
+                color: "white"
               },
             ]}
           >
@@ -48,22 +57,22 @@ const OnboardingV2 = ({ navigation }) => {
               future of love
             </Text>
           </Text>
-          <Text style={styles.subHeader}>
+          <Text style={textStyles.subHeader}>
             Our AI-powered dating app redefines connections, turning digital
             encounters into lasting romance.
           </Text>
-          <IconsContainer style = {{marginTop: 80}} />
-          <DividerWhite style={{ marginTop: 30}} />
+          <IconsContainer dark={false} style={{ marginTop: 80 }} />
+          <DividerWhite style={{ marginTop: 30 }} />
         </View>
-        <View style={styles.bottomView}>
-          <SecondaryButton
-            onPress={() => navigation.navigate("Signup")}
-          >
+        <View style={viewStyles.bottomView}>
+          <SecondaryButton onPress={() => navigation.navigate("Signup")}>
             Sign up
           </SecondaryButton>
-          <Text style={[styles.text, { marginTop: 14 }]}>
-            Existing account? <Text style={{ color: "#24786D" }}>Log in</Text>
-          </Text>
+          <TouchableOpacity onPress={loginRedirect} activeOpacity={0.8} underlayColor={"#1B5F56"}>
+            <Text style={[styles.textWhiteBold, { marginTop: 14 }]}>
+              Existing account? <Text style={{ color: "#24786D" }}>Log in</Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </View>
     </ImageBackground>
@@ -93,7 +102,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 70, // margin to push the button away from the bottom
   },
-  text : {
+  textWhiteBold : {
     color: 'white',
     fontSize: 14,
     fontFamily: 'OpenSans_700Bold',
