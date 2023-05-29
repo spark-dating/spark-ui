@@ -19,7 +19,7 @@ const OnboardingV2 = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('spark-dating/assets/Onboardingv2.jpg')}
+      source={require('spark-dating/assets/backgrounds/Onboardingv2.jpg')}
       style={styles.background}
     >
       <View style={styles.container}>

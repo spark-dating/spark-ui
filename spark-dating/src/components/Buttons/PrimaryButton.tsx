@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { TouchableOpacity, StyleSheet, TextStyle, Text } from 'react-native';
+import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle } from 'react-native';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -9,9 +9,11 @@ import {
 
 interface PrimaryButtonProps {
   onPress: () => void;
+  style?: ViewStyle; // added this line
+
 }
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress}) => {
+const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress, style}) => {
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold,
@@ -22,7 +24,7 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress}) => {
   }
 
   return (
-    <TouchableOpacity style={styles.button} activeOpacity={0.8} onPress={onPress}>
+    <TouchableOpacity style={[styles.button, style]} activeOpacity={0.8} onPress={onPress}>
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableOpacity>
   );
