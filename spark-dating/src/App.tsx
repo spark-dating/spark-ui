@@ -1,27 +1,26 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import { useFonts } from 'expo-font';
 import Constants from 'expo-constants';
 import PrimaryButton from './components/Buttons/PrimaryButton';
 import { StatusBar } from 'expo-status-bar';
+import { NavigationContainer } from '@react-navigation/native';
 
-export default function App() {
-  const [loaded] = useFonts({
-    OpenSans: require('../assets/fonts/OpenSans-Regular.ttf'),
-  });
+import OnboardingStack from './stacks/OnboardingStack';
+import UserStack from './stacks/UserStack';
 
-  if (!loaded) {
-    return null;
-  }
 
+const App = () => {
+  const user = null; // TODO: replace this with real authentication logic
   return (
-    <View style={styles.container}>
-      <Text style={{ fontFamily: 'OpenSans' }}>Hello Expo!</Text>
-      <PrimaryButton />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      {/* {user ? <UserStack /> : <OnboardingStack />} */}
+      <OnboardingStack />
+    </NavigationContainer>
   );
-}
+};
+
+export default App;
+
 
 const styles = StyleSheet.create({
   container: {
@@ -32,3 +31,18 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
 });
+
+
+
+
+// use this for fonts 
+
+
+// let [fontsLoaded] = useFonts({
+//   OpenSans_400Regular,
+//   OpenSans_700Bold,
+// });
+
+// if (!fontsLoaded) {
+//   return <Text>Loading...</Text>;
+// }

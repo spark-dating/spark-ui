@@ -7,11 +7,11 @@ import {
 } from '@expo-google-fonts/open-sans';
 
 
-interface PrimaryButtonProps {
+interface SecondaryButtonProps {
   onPress: () => void;
 }
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress}) => {
+const SecondaryButton: FC<SecondaryButtonProps> = ({children, onPress}) => {
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold,
@@ -32,16 +32,16 @@ const styles = StyleSheet.create({
   button: {
     width: 295,
     height: 56,
-    backgroundColor: '#24786D',
+    backgroundColor: '#FFFFFF',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 15,
+    borderRadius: 8,
   },
   buttonText: {
-    color: 'white',
+    color: 'black',
     fontSize: 16,
     fontFamily: 'OpenSans_700Bold',
   },
 });
 
-export default PrimaryButton;
+export default SecondaryButton;
