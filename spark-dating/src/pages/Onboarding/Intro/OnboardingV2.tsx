@@ -19,25 +19,44 @@ const OnboardingV2 = ({ navigation }) => {
 
   return (
     <ImageBackground
-      source={require('spark-dating/assets/backgrounds/Onboardingv2.jpg')}
+      source={require("spark-dating/assets/backgrounds/Onboardingv2.jpg")}
       style={styles.background}
     >
       <View style={styles.container}>
         <View style={styles.topView}>
-            <Text style={[styles.text, {display:'flex',  alignSelf: 'center', marginTop: -40, marginBottom: 40}]}>Spark</Text>
+          <Text
+            style={[
+              styles.text,
+              {
+                display: "flex",
+                alignSelf: "center",
+                marginTop: -40,
+                marginBottom: 40,
+              },
+            ]}
+          >
+            Spark
+          </Text>
           <Text style={styles.header}>
-            Experience the <Text style={{ fontFamily: 'OpenSans_700Bold' }}>future of love</Text>
+            Experience the{" "}
+            <Text style={{ fontFamily: "OpenSans_700Bold" }}>
+              future of love
+            </Text>
           </Text>
           <Text style={styles.subHeader}>
-            Our AI-powered dating app redefines connections, turning digital encounters into lasting romance.
+            Our AI-powered dating app redefines connections, turning digital
+            encounters into lasting romance.
           </Text>
         </View>
         <View style={styles.bottomView}>
-          <SecondaryButton style={styles.button} onPress={() => navigation.navigate('Login')}>
+          <SecondaryButton
+            style={styles.button}
+            onPress={() => navigation.navigate("Signup")}
+          >
             Sign up
           </SecondaryButton>
           <Text style={[styles.text, { marginTop: 14 }]}>
-            Existing account? <Text style={{ color: '#24786D' }}>Log in</Text>
+            Existing account? <Text style={{ color: "#24786D" }}>Log in</Text>
           </Text>
         </View>
       </View>

@@ -8,6 +8,7 @@ import {
 
 
 interface PrimaryButtonProps {
+  children: string;
   onPress: () => void;
   style?: ViewStyle; // added this line
 

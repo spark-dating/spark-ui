@@ -7,8 +7,9 @@ import {
 } from '@expo-google-fonts/open-sans';
 
 interface SecondaryButtonProps {
+  children: string;
   onPress: () => void;
-  style?: ViewStyle; // added this line
+  style?: ViewStyle; 
 }
 
 const SecondaryButton: FC<SecondaryButtonProps> = ({children, onPress, style}) => {
@@ -18,7 +19,7 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({children, onPress, style}) =
   });
 
   if (!fontsLoaded) {
-    return <Text>Loading...</Text>;
+    return <Text>Loading...</Text>; // update this
   }
 
   return (
