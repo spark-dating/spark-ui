@@ -38,6 +38,13 @@ const styles = StyleSheet.create({
 // use this for fonts 
 
 
+// import {
+//   useFonts,
+//   OpenSans_400Regular,
+//   OpenSans_700Bold,
+// } from '@expo-google-fonts/open-sans';
+// 
+// 
 // let [fontsLoaded] = useFonts({
 //   OpenSans_400Regular,
 //   OpenSans_700Bold,
