@@ -1,6 +1,9 @@
 import React from 'react';
 import { View, Text, StyleSheet, ImageBackground } from 'react-native';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
+import IconsContainer from '../../../components/Redirects/IconsContainer';
+import DividerWhite from '../../../components/Visual/DividerWhite';
+import { StatusBar } from 'react-native';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -18,10 +21,12 @@ const OnboardingV2 = ({ navigation }) => {
   }
 
   return (
+    
     <ImageBackground
       source={require("spark-dating/assets/backgrounds/Onboardingv2.jpg")}
       style={styles.background}
     >
+      <StatusBar barStyle="light-content" />
       <View style={styles.container}>
         <View style={styles.topView}>
           <Text
@@ -47,10 +52,11 @@ const OnboardingV2 = ({ navigation }) => {
             Our AI-powered dating app redefines connections, turning digital
             encounters into lasting romance.
           </Text>
+          <IconsContainer style = {{marginTop: 80}} />
+          <DividerWhite style={{ marginTop: 30}} />
         </View>
         <View style={styles.bottomView}>
           <SecondaryButton
-            style={styles.button}
             onPress={() => navigation.navigate("Signup")}
           >
             Sign up
@@ -80,7 +86,7 @@ const styles = StyleSheet.create({
   topView: {
     justifyContent: 'center',
     width: '90%',
-    paddingTop: 70, 
+    paddingTop: 140, 
   },
   bottomView: {
     width: '100%',

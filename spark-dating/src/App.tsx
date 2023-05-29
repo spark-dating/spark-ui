@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
-import PrimaryButton from './components/Buttons/PrimaryButton';
-import { StatusBar } from 'expo-status-bar';
 import { NavigationContainer } from '@react-navigation/native';
+
 
 import OnboardingStack from './stacks/OnboardingStack';
 import UserStack from './stacks/UserStack';
