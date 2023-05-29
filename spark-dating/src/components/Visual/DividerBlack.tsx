@@ -1,7 +1,15 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import {
+  useFonts,
+  OpenSans_400Regular
+} from '@expo-google-fonts/open-sans';
 
 const DividerBlack = ({style}) => {
+  let [fontsLoaded] = useFonts({
+    OpenSans_400Regular,
+  });
+
   return (
     <View style={[styles.container, style]}>
       <View style={styles.line} />
@@ -19,13 +27,15 @@ const styles = StyleSheet.create({
   },
   line: {
     flex: 1,
-    height: 1,
-    backgroundColor: 'black',
+    height: 0.4,
+    backgroundColor: '#CDD1D0',
+    opacity: 1,
   },
   text: {
     paddingHorizontal: 8,
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'OpenSans_400Regular',
+    color: '#797C7B',
   },
 });
 
