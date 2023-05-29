@@ -4,6 +4,8 @@ import IconsContainer from '../../../../components/Redirects/IconsContainer';
 import PrimaryButton from '../../../../components/Buttons/PrimaryButton';
 import { AntDesign } from '@expo/vector-icons';
 import { viewStyles, textStyles, commonStyles } from '../../../../styles';
+import * as Haptics from 'expo-haptics';
+import { PRIMARY_COLOR } from '../../../../constants';
 
 import {
   useFonts,
@@ -18,6 +20,12 @@ const SignUpPreScreen = ({ navigation }) => {
     OpenSans_400Regular,
     OpenSans_700Bold,
   });
+
+  const loginRedirect = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    navigation.navigate("Login");
+  };
+
   return (
     <View style={viewStyles.container}>
       <TouchableOpacity
@@ -47,12 +55,18 @@ const SignUpPreScreen = ({ navigation }) => {
         <DividerBlack style={{marginTop: 30, paddingBottom: 21, width: '80%'}}/>
         <PrimaryButton
           onPress={() => navigation.navigate("Signup")}
-        >
+        > 
           Sign up with email
         </PrimaryButton>
+        <TouchableOpacity
+            onPress={loginRedirect}
+            activeOpacity={0.8}
+            underlayColor={"#1B5F56"}
+          >
         <Text style={[textStyles.text, { marginTop: 14 }]}>
-            Already have an account? <Text style={{ color: "#24786D", fontFamily: 'OpenSans_700Bold' }}>Log in</Text>
+            Already have an account? <Text style={{ color: PRIMARY_COLOR, fontFamily: 'OpenSans_700Bold' }}>Log in</Text>
           </Text>
+          </TouchableOpacity>
       </View>
     </View>
   );

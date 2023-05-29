@@ -1,6 +1,7 @@
 import React, { FC } from 'react';
 import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle, TouchableHighlight } from 'react-native';
 import * as Haptics from 'expo-haptics';
+import { PRIMARY_COLOR } from '../../constants';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
   button: {
     width: 295,
     height: 56,
-    backgroundColor: '#24786D',
+    backgroundColor: PRIMARY_COLOR,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 15,

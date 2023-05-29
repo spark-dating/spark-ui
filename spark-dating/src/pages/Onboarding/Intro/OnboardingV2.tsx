@@ -6,7 +6,7 @@ import DividerWhite from '../../../components/Visual/DividerWhite';
 import { StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { viewStyles, textStyles } from '../../../styles';
-import { SvgUri } from 'react-native-svg';
+import { PRIMARY_COLOR } from '../../../constants';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -22,19 +22,15 @@ const OnboardingV2 = ({ navigation }) => {
   const [typewrittenText, setTypewrittenText] = useState('');
   const [typewrittenTextBold, setTypewrittenTextBold] = useState('');
   const [displaySubHeader, setDisplaySubHeader] = useState(false);
+  const [index, setIndex] = useState(0);
+  const [navigationAway, setNavigationAway] = useState(false);
 
-
-  /*
-      setDisplaySubHeader(true);
-    Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
-  */
-  
   useEffect(() => {
     const text = 'Experience the ';
-    const textBold = 'future of love';
+    const textBold = 'future of love...';
     let currentText = '';
     let currentTextBold = '';
-
+  
     const typingTimer = setInterval(() => {
       if (currentText !== text) {
         const newText = currentText + text[currentText.length];
@@ -46,31 +42,38 @@ const OnboardingV2 = ({ navigation }) => {
         currentTextBold = newTextBold;
       } else {
         clearInterval(typingTimer);
-
         setDisplaySubHeader(true);
-        Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        if (!navigationAway) {
+          Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+        }
+        clearInterval(hapticTimer);  // clear hapticTimer when typing is complete
       }
-
-      // Generate haptic feedback
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     }, 100);
-
-
+  
+    const hapticTimer = setInterval(() => {
+      if (!navigationAway) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      } else {
+        clearInterval(hapticTimer);
+      }
+    }, 100);
+  
     return () => {
       clearInterval(typingTimer);
-      
+      clearInterval(hapticTimer);
     };
-  }, []);
+  }, [navigationAway]);
+  
 
   if (!fontsLoaded) {
     return <Text>Loading...</Text>;
   }
 
   const loginRedirect = () => {
+    setNavigationAway(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Login");
   };
-
 
   return (
     <ImageBackground
@@ -109,7 +112,7 @@ const OnboardingV2 = ({ navigation }) => {
             underlayColor={"#1B5F56"}
           >
             <Text style={[styles.textWhiteBold, { marginTop: 14 }]}>
-              Existing account? <Text style={{ color: "#24786D" }}>Log in</Text>
+              Existing account? <Text style={{ color: PRIMARY_COLOR}}>Log in</Text>
             </Text>
           </TouchableOpacity>
         </View>
