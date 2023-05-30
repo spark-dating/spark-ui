@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHeaderHeight } from '@react-navigation/elements'
 import {
   View,
   Text,
@@ -17,6 +18,9 @@ import { AntDesign } from "@expo/vector-icons";
 import { viewStyles, textStyles, commonStyles } from "../../../styles";
 import DividerBlack from "../../../components/Visual/DividerBlack";
 import SignUpForm from "../../../components/Forms/SignUpForm";
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
+
 
 import {
   useFonts,
@@ -29,6 +33,8 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const headerHeight = useHeaderHeight();
 
   const allowButton = () => {
     if (
@@ -53,7 +59,7 @@ const SignUp = ({ navigation }) => {
   }
 
   return (
-    <KeyboardAvoidingView behavior="padding" style={viewStyles.container}>
+    <View style={viewStyles.container}>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack();
@@ -103,7 +109,7 @@ const SignUp = ({ navigation }) => {
           </View>
         </View>
       </TouchableWithoutFeedback>
-    </KeyboardAvoidingView>
+    </View>
   );
 };
 
