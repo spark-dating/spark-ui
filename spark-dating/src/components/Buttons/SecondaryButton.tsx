@@ -1,18 +1,17 @@
 import React, { FC } from 'react';
-import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle } from 'react-native';
-import {
-  useFonts,
-  OpenSans_400Regular,
-  OpenSans_700Bold,
-} from '@expo-google-fonts/open-sans';
+import { TouchableHighlight, StyleSheet, TextStyle, Text, ViewStyle } from 'react-native';
+import * as Haptics from 'expo-haptics';
+
+import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
 
 interface SecondaryButtonProps {
   children: string;
   onPress: () => void;
-  style?: ViewStyle; 
+  style?: ViewStyle;
+  disabled?: boolean; // added this line
 }
 
-const SecondaryButton: FC<SecondaryButtonProps> = ({children, onPress, style}) => {
+const SecondaryButton: FC<SecondaryButtonProps> = ({ children, onPress, style, disabled }) => {
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold,
@@ -22,27 +21,42 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({children, onPress, style}) =
     return <Text>Loading...</Text>; // update this
   }
 
+  const pressHandler = () => {
+    if (!disabled) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      onPress();
+    }
+  };
+
+  const backgroundColor = disabled ? '#BABABA' : '#BABABA';
+  const textColor = disabled ? '#797C7B' : 'black';
+
+  const styles = StyleSheet.create({
+    button: {
+      width: 295,
+      height: 56,
+      backgroundColor: disabled ? '#BABABA' : '#FFFFFF',
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 15,
+    },
+    buttonText: {
+      color: textColor,
+      fontSize: 16,
+      fontFamily: 'OpenSans_700Bold',
+    },
+  });
+
   return (
-    <TouchableOpacity style={[styles.button, style]} activeOpacity={0.8} onPress={onPress}>
+    <TouchableHighlight
+      underlayColor={backgroundColor}
+      style={[styles.button, style]}
+      activeOpacity={disabled ? 1 : 0.8}
+      onPress={pressHandler}
+    >
       <Text style={styles.buttonText}>{children}</Text>
-    </TouchableOpacity>
+    </TouchableHighlight>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    width: 295,
-    height: 56,
-    backgroundColor: '#FFFFFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 15,
-  },
-  buttonText: {
-    color: 'black',
-    fontSize: 16,
-    fontFamily: 'OpenSans_700Bold',
-  },
-});
 
 export default SecondaryButton;
