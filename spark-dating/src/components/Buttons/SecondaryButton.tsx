@@ -28,14 +28,14 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({ children, onPress, style, d
     }
   };
 
-  const backgroundColor = disabled ? '#BABABA' : '#FFFFFF';
+  const backgroundColor = disabled ? '#BABABA' : '#BABABA';
   const textColor = disabled ? '#797C7B' : 'black';
 
   const styles = StyleSheet.create({
     button: {
       width: 295,
       height: 56,
-      backgroundColor: backgroundColor,
+      backgroundColor: disabled ? '#BABABA' : '#FFFFFF',
       justifyContent: 'center',
       alignItems: 'center',
       borderRadius: 15,

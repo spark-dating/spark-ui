@@ -112,7 +112,8 @@ const OnboardingV2 = ({ navigation }) => {
           <DividerWhite
             style={{ marginTop: 30, paddingBottom: 21, width: "80%" }}
           />
-          <SecondaryButton onPress={signUpRedirect}>
+          <SecondaryButton 
+          onPress={signUpRedirect}>
             Sign up
           </SecondaryButton>
           <TouchableOpacity
