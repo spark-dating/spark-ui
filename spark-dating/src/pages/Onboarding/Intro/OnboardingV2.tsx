@@ -45,7 +45,7 @@ const OnboardingV2 = ({ navigation }) => {
         clearInterval(typingTimer);
         setDisplaySubHeader(true);
       }
-    }, 75);
+    }, 50);
     return () => {
       clearInterval(typingTimer);
       setInitialRender(false);
@@ -62,7 +62,7 @@ const OnboardingV2 = ({ navigation }) => {
         }
         clearInterval(hapticTimer);
       }
-    }, 75);
+    }, 50);
 
     return () => clearInterval(hapticTimer);
   }, [navigationAway, initialRender, displaySubHeader]);
