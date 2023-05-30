@@ -6,15 +6,19 @@ import {
     OpenSans_600SemiBold
   } from '@expo-google-fonts/open-sans';
 
-  type SignInFormProps = {
+
+  type SignUpFormProps = {
+    firstName: string,
     email: string,
     setEmail: (email: string) => void,
     password: string,
-    setPassword: (password: string) => void
+    setFirstName: (firstName: string) => void,
+    setPassword: (password: string) => void,
+    confirmPassword: string,
+    setConfirmPassword: (confirmPassword: string) => void
   }
 
-
-const SignInForm: React.FC<SignInFormProps> = ({setPassword, setEmail, email, password}) => {
+const SignUpForm: React.FC<SignUpFormProps> = ({email, setEmail, setPassword, setFirstName, firstName, password, confirmPassword, setConfirmPassword}) => {
 
   // const [email, setEmail] = useState('');
   // const [password, setPassword] = useState('');
@@ -29,6 +33,14 @@ const SignInForm: React.FC<SignInFormProps> = ({setPassword, setEmail, email, pa
 
   return (
     <View style={styles.container}>
+      <Text style={styles.label}>First Name</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setFirstName}
+        value={firstName}
+        keyboardType="default"
+        // autoCapitalize="first-letter"
+      />
       <Text style={styles.label}>Email</Text>
       <TextInput
         style={styles.input}
@@ -44,11 +56,18 @@ const SignInForm: React.FC<SignInFormProps> = ({setPassword, setEmail, email, pa
         value={password}
         secureTextEntry={true}
       />
+      <Text style={styles.label}>Confirm Password</Text>
+      <TextInput
+        style={styles.input}
+        onChangeText={setConfirmPassword}
+        value={confirmPassword}
+        secureTextEntry={true}
+      />
     </View>
   );
 };
 
-export default SignInForm;
+export default SignUpForm;
 
 const styles = StyleSheet.create({
   container: {

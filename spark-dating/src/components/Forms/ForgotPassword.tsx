@@ -1,20 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import IconsContainer from '../../../../components/Redirects/IconsContainer';
-import PrimaryButton from '../../../../components/Buttons/PrimaryButton';
+import IconsContainer from '../../components/Redirects/IconsContainer';
+import PrimaryButton from '../../components/Buttons/PrimaryButton';
 import { AntDesign } from '@expo/vector-icons';
-import DividerBlack from '../../../../components/Visual/DividerBlack';
-import { viewStyles, textStyles, commonStyles } from '../../../../styles';
-import SignInForm from '../../../../components/Forms/SigninForm';
+import { viewStyles, textStyles, commonStyles } from '../../styles';
 
 import {
   useFonts,
   OpenSans_400Regular,
   OpenSans_700Bold,
-  OpenSans_600SemiBold
 } from '@expo-google-fonts/open-sans';
+import DividerBlack from '../../components/Visual/DividerBlack';
 
-const LoginScreen = ({ navigation }) => {
+const ForgotPassword = ({ navigation }) => {
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold,
@@ -42,15 +40,12 @@ const LoginScreen = ({ navigation }) => {
           source={require("spark-dating/assets/sparkblack.png")}
           style={commonStyles.icon}
         />
-        <Text style={textStyles.header}>Log in</Text>
-        <Text style={textStyles.subHeader}>Welcome back! Sign in using a social media account or your email address.</Text>
-      <View style = {{width:'100%', paddingTop: 50}}>
-        <SignInForm />
-      </View>
-        <DividerBlack style={{marginTop: 30, paddingBottom: 20, width: '100%'}}/>
-        <IconsContainer dark={true} style={{marginTop: 20}}/>
+        <Text style={textStyles.header}>Header</Text>
+        <Text style={textStyles.subHeader}>Sub header</Text>
       </View>
       <View style={viewStyles.bottomView}>
+        <IconsContainer dark={true} style={{marginTop: 80}}/>
+        <DividerBlack style={{marginTop: 30, paddingBottom: 21, width: '80%'}}/>
         <PrimaryButton onPress={() => {}}>
           Button Text
         </PrimaryButton>
@@ -62,4 +57,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default ForgotPassword;

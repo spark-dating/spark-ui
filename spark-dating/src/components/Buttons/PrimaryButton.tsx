@@ -8,15 +8,14 @@ import {
   OpenSans_700Bold,
 } from '@expo-google-fonts/open-sans';
 
-
 interface PrimaryButtonProps {
   children: string;
   onPress: () => void;
-  style?: ViewStyle; // added this line
-
+  style?: ViewStyle;
+  disabled?: boolean; // added this line
 }
 
-const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress, style}) => {
+const PrimaryButton: FC<PrimaryButtonProps> = ({ children, onPress, style, disabled }) => {
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,
     OpenSans_700Bold,
@@ -27,33 +26,42 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({children, onPress, style}) => {
   }
 
   const pressHandler = () => {
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-    onPress();
+    if (!disabled) {
+      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      onPress();
+    }
   };
-  
 
+  const backgroundColor = disabled ? '#F3F6F6' : PRIMARY_COLOR;
+  const textColor = disabled ? '#797C7B' : 'white';
+  const pressColor = disabled ? '#F3F6F6' : '#1B5F56';
+
+  const styles = StyleSheet.create({
+    button: {
+      width: 295,
+      height: 56,
+      backgroundColor: backgroundColor,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 15,
+    },
+    buttonText: {
+      color: textColor,
+      fontSize: 16,
+      fontFamily: 'OpenSans_700Bold',
+    },
+  });
 
   return (
-    <TouchableHighlight underlayColor={'#1B5F56'} style={[styles.button, style]} activeOpacity={0.8} onPress={pressHandler}>
+    <TouchableHighlight
+      underlayColor={pressColor}
+      style={[styles.button, style]}
+      activeOpacity={disabled ? 1 : 0.8}
+      onPress={pressHandler}
+    >
       <Text style={styles.buttonText}>{children}</Text>
     </TouchableHighlight>
   );
 };
-
-const styles = StyleSheet.create({
-  button: {
-    width: 295,
-    height: 56,
-    backgroundColor: PRIMARY_COLOR,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 15,
-  },
-  buttonText: {
-    color: 'white',
-    fontSize: 16,
-    fontFamily: 'OpenSans_700Bold',
-  },
-});
 
 export default PrimaryButton;

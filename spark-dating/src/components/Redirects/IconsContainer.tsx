@@ -25,17 +25,17 @@ const IconsContainer = ({style, dark}) => {
 
   return (
     <View style={[styles.container, style]}>
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
         <CircleIcon>
           <FontAwesome name="facebook" size={24} color={color} />
         </CircleIcon>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
         <CircleIcon>
           <AntDesign name="google" size={24} color={color} />
         </CircleIcon>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
         <CircleIcon>
           <Ionicons name="logo-apple" size={24} color={color} />
         </CircleIcon>

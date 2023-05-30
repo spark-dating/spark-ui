@@ -1,18 +1,18 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import IconsContainer from '../../../../components/Redirects/IconsContainer';
-import PrimaryButton from '../../../../components/Buttons/PrimaryButton';
+import IconsContainer from '../../../components/Redirects/IconsContainer';
+import PrimaryButton from '../../../components/Buttons/PrimaryButton';
 import { AntDesign } from '@expo/vector-icons';
-import { viewStyles, textStyles, commonStyles } from '../../../../styles';
+import { viewStyles, textStyles, commonStyles } from '../../../styles';
 import * as Haptics from 'expo-haptics';
-import { PRIMARY_COLOR } from '../../../../constants';
+import { PRIMARY_COLOR } from '../../../constants';
 
 import {
   useFonts,
   OpenSans_400Regular,
   OpenSans_700Bold,
 } from '@expo-google-fonts/open-sans';
-import DividerBlack from '../../../../components/Visual/DividerBlack';
+import DividerBlack from '../../../components/Visual/DividerBlack';
 
 
 const SignUpPreScreen = ({ navigation }) => {
@@ -27,7 +27,7 @@ const SignUpPreScreen = ({ navigation }) => {
   };
 
   return (
-    <View style={viewStyles.container}>
+    <View style={[viewStyles.container, {backgroundColor: 'white'}]}>
       <TouchableOpacity
         onPress={() => {
           navigation.goBack()
@@ -54,7 +54,7 @@ const SignUpPreScreen = ({ navigation }) => {
         <IconsContainer dark={true} style={{marginTop: 80}}/>
         <DividerBlack style={{marginTop: 30, paddingBottom: 21, width: '80%'}}/>
         <PrimaryButton
-          onPress={() => navigation.navigate("Signup")}
+          onPress={() => navigation.navigate("SignUp")}
         > 
           Sign up with email
         </PrimaryButton>

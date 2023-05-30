@@ -26,7 +26,7 @@ const OnboardingV2 = ({ navigation }) => {
   const [initialRender, setInitialRender] = useState(true);
 
 
-  useEffect(() => {
+  useEffect(() => { // typewriter effect
     const text = 'Experience the ';
     const textBold = 'future of love...';
     let currentText = '';
@@ -44,27 +44,28 @@ const OnboardingV2 = ({ navigation }) => {
       } else {
         clearInterval(typingTimer);
         setDisplaySubHeader(true);
+      }
+    }, 75);
+    return () => {
+      clearInterval(typingTimer);
+      setInitialRender(false);
+    };
+  }, []);
+
+  useEffect(() => { // haptic feedback
+    const hapticTimer = setInterval(() => {
+      if (!navigationAway && initialRender && !displaySubHeader) {
+        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+      } else {
         if (!navigationAway && initialRender) {
           Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
         }
-        clearInterval(hapticTimer);  // clear hapticTimer when typing is complete
-      }
-    }, 100);
-  
-    const hapticTimer = setInterval(() => {
-      if (!navigationAway && initialRender) {
-        Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
-      } else {
         clearInterval(hapticTimer);
       }
-    }, 100);
-  
-    return () => {
-      clearInterval(typingTimer);
-      clearInterval(hapticTimer);
-      setInitialRender(false);
-    };
-  }, [navigationAway]);
+    }, 75);
+
+    return () => clearInterval(hapticTimer);
+  }, [navigationAway, initialRender, displaySubHeader]);
   
 
   if (!fontsLoaded) {
@@ -77,13 +78,19 @@ const OnboardingV2 = ({ navigation }) => {
     navigation.navigate("Login");
   };
 
+  const signUpRedirect = () => {
+    setNavigationAway(true);
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    navigation.navigate("PreSignUp");
+  };
+
   return (
     <ImageBackground
       source={require("spark-dating/assets/backgrounds/Onboardingv2.jpg")}
       style={styles.background}
     >
       <StatusBar barStyle="light-content" />
-      <View style={viewStyles.container}>
+      <View style={viewStyles.containerIntro}>
         <View style={viewStyles.topView}>
           <Image
             tintColor="white"
@@ -105,7 +112,7 @@ const OnboardingV2 = ({ navigation }) => {
           <DividerWhite
             style={{ marginTop: 30, paddingBottom: 21, width: "80%" }}
           />
-          <SecondaryButton onPress={() => navigation.navigate("Signup")}>
+          <SecondaryButton onPress={signUpRedirect}>
             Sign up
           </SecondaryButton>
           <TouchableOpacity

@@ -5,6 +5,13 @@ const { width, height } = Dimensions.get('window');
 export const viewStyles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "white",
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  containerIntro: {
+    flex: 1,
     backgroundColor: "transparent",
     alignItems: "center",
     justifyContent: "space-between",
@@ -29,15 +36,25 @@ export const textStyles = StyleSheet.create({
     fontFamily: 'OpenSans_400Regular',
     marginTop: 18,
   },
+  headerSmall: {
+    color: 'black',
+    fontSize: 40,
+    fontFamily: 'OpenSans_400Regular',
+  },
   header: {
     color: 'black',
     fontSize: 64, 
     fontFamily: 'OpenSans_400Regular',
   },
   text: {
-    color: 'black',
+    // color: 'black',
     fontSize: 14, 
     fontFamily: 'OpenSans_400Regular',
+  },
+  boldText: {
+    // color: 'black',
+    fontSize: 14, 
+    fontFamily: 'OpenSans_700Bold',
   },
 });
 
