@@ -21,7 +21,7 @@ export const viewStyles = StyleSheet.create({
   topView: {
     justifyContent: 'center',
     width: '90%',
-    paddingTop: height * 0.13, // For example
+    paddingTop: height * 0.10, // For example
   },
   bottomView: {
     width: '100%',
@@ -98,7 +98,7 @@ export const formStyles = StyleSheet.create({
     marginBottom: 8,
   },
   input: {
-    height: 40,
+    height: height * 0.06,
     borderBottomWidth: 1,
     borderBottomColor: 'grey', // thin grey line
     marginBottom: 16,
