@@ -1,3 +1,5 @@
+// this is the intro page for the onboarding process
+
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ImageBackground, Image, SafeAreaView } from 'react-native';
 import SecondaryButton from '../../../components/Buttons/SecondaryButton';
@@ -5,7 +7,7 @@ import IconsContainer from '../../../components/Redirects/IconsContainer';
 import DividerWhite from '../../../components/Visual/DividerWhite';
 import { StatusBar, TouchableOpacity, TouchableHighlight } from 'react-native';
 import * as Haptics from 'expo-haptics';
-import { viewStyles, textStyles } from '../../../styles';
+import { viewStyles, textStyles, commonStyles } from '../../../styles';
 import { PRIMARY_COLOR } from '../../../constants';
 import {
   useFonts,
@@ -26,7 +28,7 @@ const OnboardingV2 = ({ navigation }) => {
   const [initialRender, setInitialRender] = useState(true);
 
 
-  useEffect(() => { // typewriter effect
+  useEffect(() => { // typewriter effect -----------------------------
     const text = 'Experience the ';
     const textBold = 'future of love...';
     let currentText = '';
@@ -51,8 +53,9 @@ const OnboardingV2 = ({ navigation }) => {
       setInitialRender(false);
     };
   }, []);
+//---------------------------------------------------------------
 
-  useEffect(() => { // haptic feedback
+  useEffect(() => { // haptic feedback -----------------------------
     const hapticTimer = setInterval(() => {
       if (!navigationAway && initialRender && !displaySubHeader) {
         Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
@@ -66,23 +69,26 @@ const OnboardingV2 = ({ navigation }) => {
 
     return () => clearInterval(hapticTimer);
   }, [navigationAway, initialRender, displaySubHeader]);
-  
+  // ---------------------------------------------------------------
 
-  if (!fontsLoaded) {
+
+  
+  if (!fontsLoaded) { // font failure 
     return <Text>Loading...</Text>;
   }
 
-  const loginRedirect = () => {
+  const loginRedirect = () => { // login redirect 
     setNavigationAway(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("Login");
   };
 
-  const signUpRedirect = () => {
+  const signUpRedirect = () => { // sign up redirect
     setNavigationAway(true);
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("PreSignUp");
   };
+
 
   return (
     <ImageBackground
@@ -95,11 +101,11 @@ const OnboardingV2 = ({ navigation }) => {
           <Image
             tintColor="white"
             source={require("spark-dating/assets/sparkblack.png")}
-            style={styles.icon}
+            style={commonStyles.icon}
           />
-          <Text style={styles.header}>
+          <Text style={textStyles.headerWhite}>
             {typewrittenText}{''}
-        <Text style={styles.boldText}>{typewrittenTextBold}</Text>
+        <Text style={textStyles.boldOnboarding}>{typewrittenTextBold}</Text>
           </Text>
           {displaySubHeader ? <Text style={textStyles.subHeader}>
             Our AI-powered dating app redefines connections, turning digital
@@ -138,48 +144,9 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: 'cover',
   },
-  container: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  topView: {
-    justifyContent: 'center',
-    width: '90%',
-    paddingTop: 140, 
-  },
-  bottomView: {
-    width: '100%',
-    alignItems: 'center',
-    marginBottom: 70,
-  },
   textWhiteBold : {
     color: 'white',
     fontSize: 14,
     fontFamily: 'OpenSans_700Bold',
   },
-  header : {
-    color: 'white',
-    fontSize: 64,
-    fontFamily: 'OpenSans_400Regular',
-  },
-  boldText: {
-    fontFamily: 'OpenSans_700Bold',
-  },
-  subHeader: {
-    color: '#B9C1BE',
-    fontSize: 18,
-    lineHeight: 26,
-    fontFamily: 'OpenSans_400Regular',
-    marginTop: 18,
-  },
-  icon : {
-    width: 50,
-    height: 50,
-    zIndex: 1,
-    alignSelf: 'center',
-    marginTop: -20,
-    marginBottom: 20,
-  }
 });

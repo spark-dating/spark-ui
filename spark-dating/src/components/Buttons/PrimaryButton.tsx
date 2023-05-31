@@ -2,6 +2,7 @@ import React, { FC } from 'react';
 import { TouchableOpacity, StyleSheet, TextStyle, Text, ViewStyle, TouchableHighlight } from 'react-native';
 import * as Haptics from 'expo-haptics';
 import { PRIMARY_COLOR } from '../../constants';
+import { buttonStyles } from '../../styles';
 import {
   useFonts,
   OpenSans_400Regular,
@@ -38,28 +39,28 @@ const PrimaryButton: FC<PrimaryButtonProps> = ({ children, onPress, style, disab
 
   const styles = StyleSheet.create({
     button: {
-      width: 295,
-      height: 56,
       backgroundColor: backgroundColor,
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 15,
+      // width: 295,
+      // height: 56,
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // borderRadius: 15,
     },
     buttonText: {
       color: textColor,
-      fontSize: 16,
-      fontFamily: 'OpenSans_700Bold',
+      // fontSize: 16,
+      // fontFamily: 'OpenSans_700Bold',
     },
   });
 
   return (
     <TouchableHighlight
       underlayColor={pressColor}
-      style={[styles.button, style]}
+      style={[buttonStyles.button, styles.button, style]}
       activeOpacity={disabled ? 1 : 0.8}
       onPress={pressHandler}
     >
-      <Text style={styles.buttonText}>{children}</Text>
+      <Text style={[buttonStyles.text, styles.buttonText]}>{children}</Text>
     </TouchableHighlight>
   );
 };

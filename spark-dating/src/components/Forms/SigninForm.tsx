@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { PRIMARY_COLOR } from '../../constants';
+import { formStyles } from '../../styles';
 import {
     useFonts,
     OpenSans_600SemiBold
@@ -28,18 +29,18 @@ const SignInForm: React.FC<SignInFormProps> = ({setPassword, setEmail, email, pa
     }
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.label}>Email</Text>
+    <View style={formStyles.container}>
+      <Text style={formStyles.label}>Email</Text>
       <TextInput
-        style={styles.input}
+        style={formStyles.input}
         onChangeText={setEmail}
         value={email}
         keyboardType="email-address"
         autoCapitalize="none"
       />
-      <Text style={styles.label}>Password</Text>
+      <Text style={formStyles.label}>Password</Text>
       <TextInput
-        style={styles.input}
+        style={formStyles.input}
         onChangeText={setPassword}
         value={password}
         secureTextEntry={true}
@@ -49,21 +50,3 @@ const SignInForm: React.FC<SignInFormProps> = ({setPassword, setEmail, email, pa
 };
 
 export default SignInForm;
-
-const styles = StyleSheet.create({
-  container: {
-    width: '100%',
-  },
-  label: {
-    fontFamily: 'OpenSans_600SemiBold',
-    fontSize: 16,
-    color: PRIMARY_COLOR,
-    marginBottom: 8,
-  },
-  input: {
-    height: 40,
-    borderBottomWidth: 1,
-    borderBottomColor: 'grey', // thin grey line
-    marginBottom: 16,
-  },
-});

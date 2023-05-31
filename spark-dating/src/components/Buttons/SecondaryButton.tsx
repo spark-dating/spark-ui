@@ -3,6 +3,7 @@ import { TouchableHighlight, StyleSheet, TextStyle, Text, ViewStyle } from 'reac
 import * as Haptics from 'expo-haptics';
 
 import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from '@expo-google-fonts/open-sans';
+import { buttonStyles } from '../../styles';
 
 interface SecondaryButtonProps {
   children: string;
@@ -33,28 +34,28 @@ const SecondaryButton: FC<SecondaryButtonProps> = ({ children, onPress, style, d
 
   const styles = StyleSheet.create({
     button: {
-      width: 295,
-      height: 56,
+      // width: 295,
+      // height: 56,
       backgroundColor: disabled ? '#BABABA' : '#FFFFFF',
-      justifyContent: 'center',
-      alignItems: 'center',
-      borderRadius: 15,
+      // justifyContent: 'center',
+      // alignItems: 'center',
+      // borderRadius: 15,
     },
     buttonText: {
       color: textColor,
-      fontSize: 16,
-      fontFamily: 'OpenSans_700Bold',
+      // fontSize: 16,
+      // fontFamily: 'OpenSans_700Bold',
     },
   });
 
   return (
     <TouchableHighlight
       underlayColor={backgroundColor}
-      style={[styles.button, style]}
+      style={[buttonStyles.button, styles.button, style]}
       activeOpacity={disabled ? 1 : 0.8}
       onPress={pressHandler}
     >
-      <Text style={styles.buttonText}>{children}</Text>
+      <Text style={[buttonStyles.text, styles.buttonText]}>{children}</Text>
     </TouchableHighlight>
   );
 };

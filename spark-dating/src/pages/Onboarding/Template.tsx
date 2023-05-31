@@ -58,3 +58,5 @@ const TemplateScreen = ({ navigation }) => {
 };
 
 export default TemplateScreen;
+
+// don't forget to update documentation on Notion

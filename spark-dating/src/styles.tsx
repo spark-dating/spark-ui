@@ -1,4 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
+import { PRIMARY_COLOR } from './constants';
+import { horizontalScale, verticalScale, moderateScale } from './metrics';
 
 const { width, height } = Dimensions.get('window');
 
@@ -17,14 +19,14 @@ export const viewStyles = StyleSheet.create({
     justifyContent: "space-between",
   },
   topView: {
-    justifyContent: "center",
-    width: "80%",
-    paddingTop: height * 0.13, // Adjust the value as needed
+    justifyContent: 'center',
+    width: '90%',
+    paddingTop: height * 0.13, // For example
   },
   bottomView: {
-    width: "100%",
-    alignItems: "center",
-    marginBottom: height * 0.05, // Adjust the value as needed
+    width: '100%',
+    alignItems: 'center',
+    marginBottom: height * 0.05, // For example
   },
 });
 
@@ -46,6 +48,11 @@ export const textStyles = StyleSheet.create({
     fontSize: 64, 
     fontFamily: 'OpenSans_400Regular',
   },
+  headerWhite : {
+    color: 'white',
+    fontSize: 64,
+    fontFamily: 'OpenSans_400Regular',
+  },
   text: {
     // color: 'black',
     fontSize: 14, 
@@ -54,6 +61,9 @@ export const textStyles = StyleSheet.create({
   boldText: {
     // color: 'black',
     fontSize: 14, 
+    fontFamily: 'OpenSans_700Bold',
+  },
+  boldOnboarding: {
     fontFamily: 'OpenSans_700Bold',
   },
 });
@@ -77,3 +87,34 @@ export const commonStyles = StyleSheet.create({
   },
 })
 
+export const formStyles = StyleSheet.create({
+  container: {
+    width: '100%',
+  },
+  label: {
+    fontFamily: 'OpenSans_600SemiBold',
+    fontSize: 16,
+    color: PRIMARY_COLOR,
+    marginBottom: 8,
+  },
+  input: {
+    height: 40,
+    borderBottomWidth: 1,
+    borderBottomColor: 'grey', // thin grey line
+    marginBottom: 16,
+  },
+});
+
+export const buttonStyles = StyleSheet.create({
+    button: {
+      width: 295,
+      height: 56,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 15,
+    },
+    text: {
+      fontSize: 16,
+      fontFamily: 'OpenSans_700Bold',
+    },
+  });
