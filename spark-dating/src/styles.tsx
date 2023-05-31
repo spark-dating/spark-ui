@@ -102,7 +102,7 @@ export const formStyles = StyleSheet.create({
   },
   label: {
     fontFamily: 'OpenSans_600SemiBold',
-    fontSize: hp('1.8%'),
+    fontSize: hp('1.6%'),
     color: PRIMARY_COLOR,
     marginBottom: hp('1%'),
   },
@@ -115,15 +115,35 @@ export const formStyles = StyleSheet.create({
 });
 
 export const buttonStyles = StyleSheet.create({
-    button: {
-      width: 295,
-      height: 56,
-      justifyContent: 'center',
+  button: {
+    width: wp('73.75%'),
+    height: hp('7%'),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: hp('1.875%'),
+  },
+  text: {
+    fontSize: hp('2%'),
+    fontFamily: 'OpenSans_700Bold',
+  },
+});
+
+  export const IconsContainerStyles = StyleSheet.create({
+    container: {
+      flexDirection: 'row',
       alignItems: 'center',
-      borderRadius: 15,
+      justifyContent: 'center',
+      gap: wp('3.7%'),
     },
-    text: {
-      fontSize: 16,
-      fontFamily: 'OpenSans_700Bold',
+    circle: {
+      width: hp('9%'),
+      height: hp('9%'),
+      borderRadius: hp('6.25%'),
+      borderWidth: 1,
+      borderColor: '#797C7B',
+      marginHorizontal: wp('3.7%'),
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: hp('-2%'),
     },
   });

@@ -1,33 +1,29 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import IconsContainer from '../../../components/Redirects/IconsContainer';
-import PrimaryButton from '../../../components/Buttons/PrimaryButton';
-import { AntDesign } from '@expo/vector-icons';
-import DividerBlack from '../../../components/Visual/DividerBlack';
-import { viewStyles, textStyles, commonStyles } from '../../../styles';
-import SignInForm from '../../../components/Forms/SigninForm';
-import * as Haptics from 'expo-haptics';
-
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native";
+import IconsContainer from "../../../components/Redirects/IconsContainer";
+import PrimaryButton from "../../../components/Buttons/PrimaryButton";
+import { AntDesign } from "@expo/vector-icons";
+import DividerBlack from "../../../components/Visual/DividerBlack";
+import { viewStyles, textStyles, commonStyles } from "../../../styles";
+import SignInForm from "../../../components/Forms/SigninForm";
+import * as Haptics from "expo-haptics";
 
 import {
   useFonts,
   OpenSans_400Regular,
   OpenSans_700Bold,
-  OpenSans_600SemiBold
-} from '@expo-google-fonts/open-sans';
-import { PRIMARY_COLOR } from '../../../constants';
+  OpenSans_600SemiBold,
+} from "@expo-google-fonts/open-sans";
+import { PRIMARY_COLOR } from "../../../constants";
 
 const LoginScreen = ({ navigation }) => {
-
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const forgotPasswordRedirect = () => {
     Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
     navigation.navigate("ForgotPassword");
   };
-
-
 
   let [fontsLoaded] = useFonts({
     OpenSans_400Regular,

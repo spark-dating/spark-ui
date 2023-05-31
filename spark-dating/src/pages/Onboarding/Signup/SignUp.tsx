@@ -19,6 +19,9 @@ import { viewStyles, textStyles, commonStyles } from "../../../styles";
 import DividerBlack from "../../../components/Visual/DividerBlack";
 import SignUpForm from "../../../components/Forms/SignUpForm";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { PRIMARY_COLOR } from "../../../constants";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+
 
 
 
@@ -82,7 +85,7 @@ const SignUp = ({ navigation }) => {
             <Text style={textStyles.subHeader}>
               Sign up with your email address.
             </Text>
-            <View style={{ width: "100%", marginTop: 30 }}>
+            <View style={{marginTop: hp('3.75%') }}>
               <SignUpForm
                 firstName={firstName}
                 email={email}
@@ -104,8 +107,8 @@ const SignUp = ({ navigation }) => {
               <PrimaryButton disabled={true}>Sign up</PrimaryButton>
             )}
             <Text style={[textStyles.text, { marginTop: 14 }]}>
-              Secondary Text
-            </Text>
+            Already have an account? <Text style={{ color: PRIMARY_COLOR, fontFamily: 'OpenSans_700Bold' }}>Log in</Text>
+          </Text>
           </View>
         </View>
       </TouchableWithoutFeedback>

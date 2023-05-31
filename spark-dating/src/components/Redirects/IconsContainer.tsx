@@ -2,11 +2,12 @@ import React from 'react';
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { FontAwesome, AntDesign, Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
+import { IconsContainerStyles } from '../../styles';
 
 
 const CircleIcon = ({ children }) => {
   return (
-    <View style={styles.circle}>
+    <View style={IconsContainerStyles.circle}>
       {children}
     </View>
   );
@@ -24,7 +25,7 @@ const IconsContainer = ({style, dark}) => {
   const color = dark ? 'black' : 'white';
 
   return (
-    <View style={[styles.container, style]}>
+    <View style={[IconsContainerStyles.container, style]}>
       <TouchableOpacity activeOpacity={0.6} onPress={onPress}>
         <CircleIcon>
           <FontAwesome name="facebook" size={24} color={color} />
@@ -44,23 +45,5 @@ const IconsContainer = ({style, dark}) => {
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: 15,
-  },
-  circle: {
-    width: 70,
-    height: 70,
-    borderRadius: 50,
-    borderWidth: 1,
-    borderColor: '#797C7B',
-    marginHorizontal: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
 
 export default IconsContainer;
