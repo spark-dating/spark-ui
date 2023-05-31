@@ -78,7 +78,7 @@ const SignUp = ({ navigation }) => {
               source={require("spark-dating/assets/sparkblack.png")}
               style={commonStyles.icon}
             />
-            <Text style={textStyles.header}>Sign up with email</Text>
+            <Text style={textStyles.formHeader}>Sign up with email</Text>
             <Text style={textStyles.subHeader}>
               Sign up with your email address.
             </Text>

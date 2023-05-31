@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { PRIMARY_COLOR } from './constants';
 import { horizontalScale, verticalScale, moderateScale } from './metrics';
-import { hp, wp } from 'react-native-responsive-screen';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 
 const { width, height } = Dimensions.get('window');
@@ -35,34 +35,44 @@ export const viewStyles = StyleSheet.create({
 export const textStyles = StyleSheet.create({
   subHeader: {
     color: '#797C7B',
-    fontSize: 18, 
-    lineHeight: 26,
+    fontSize: hp('2.2%'), 
+    lineHeight: hp('3.2%'),
     fontFamily: 'OpenSans_400Regular',
-    marginTop: 18,
+    marginTop: hp('1%'),
   },
   headerSmall: {
     color: 'black',
-    fontSize: 40,
+    fontSize: hp('5%'),
     fontFamily: 'OpenSans_400Regular',
   },
   header: {
     color: 'black',
-    fontSize: 64, 
+    fontSize: hp('8%'), 
     fontFamily: 'OpenSans_400Regular',
+  },
+  header2: {
+    color: 'black',
+    fontSize: hp('8%'),
+    fontFamily: 'OpenSans_700Bold',
+  },
+  formHeader: {
+    color: 'black',
+    fontSize: hp('5%'), 
+    fontFamily: 'OpenSans_700Bold',
   },
   headerWhite : {
     color: 'white',
-    fontSize: height * 0.07,
+    fontSize: hp('6%'),
     fontFamily: 'OpenSans_400Regular',
   },
   text: {
     // color: 'black',
-    fontSize: 14, 
+    fontSize: hp('1.7%'), 
     fontFamily: 'OpenSans_400Regular',
   },
   boldText: {
     // color: 'black',
-    fontSize: 14, 
+    fontSize: hp('1.7%'), 
     fontFamily: 'OpenSans_700Bold',
   },
   boldOnboarding: {
@@ -72,38 +82,35 @@ export const textStyles = StyleSheet.create({
 
 export const commonStyles = StyleSheet.create({
   icon : {
-    width: 50,
-    height: 50,
+    width: hp('6%'),
+    height: hp('6%'),
     zIndex: 1,
     alignSelf: 'center',
-    marginTop: -20,
-    marginBottom: 20,
+    marginTop: hp('-2.5%'),
+    marginBottom: hp('2.5%'),
   },
   arrow: {
     position: "absolute",
-    // top: height * 0.1, // Adjust the value as needed
-    // left: width * 0.1, // Adjust the value as needed
-    top: 60,
-    left: 40,
+    top: hp('8%'),
+    left: wp('10%'),
     zIndex: 1,
   },
-})
-
+});
 export const formStyles = StyleSheet.create({
   container: {
     width: '100%',
   },
   label: {
     fontFamily: 'OpenSans_600SemiBold',
-    fontSize: 16,
+    fontSize: hp('1.8%'),
     color: PRIMARY_COLOR,
-    marginBottom: 8,
+    marginBottom: hp('1%'),
   },
   input: {
-    height: height * 0.06,
+    height: hp('5%'),
     borderBottomWidth: 1,
     borderBottomColor: 'grey', // thin grey line
-    marginBottom: 16,
+    marginBottom: hp('2%'),
   },
 });
 

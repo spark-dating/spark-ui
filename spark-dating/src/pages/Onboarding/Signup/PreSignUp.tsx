@@ -43,7 +43,7 @@ const SignUpPreScreen = ({ navigation }) => {
             tintColor="black"
             source={require("spark-dating/assets/sparkblack.png")}
             style={styles.icon}/>
-        <Text style={textStyles.header}>Sign up</Text>
+        <Text style={textStyles.header2}>Sign up</Text>
         <Text style={textStyles.subHeader}>
           Sign up with a social media account or your email address.
         </Text>

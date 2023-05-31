@@ -56,7 +56,7 @@ const LoginScreen = ({ navigation }) => {
           source={require("spark-dating/assets/sparkblack.png")}
           style={commonStyles.icon}
         />
-        <Text style={textStyles.header}>Log in</Text>
+        <Text style={textStyles.formHeader}>Log in</Text>
         <Text style={textStyles.subHeader}>
           Welcome back! Sign in using a social media account or your email
           address.
