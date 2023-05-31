@@ -1,6 +1,8 @@
 import { StyleSheet, Dimensions } from 'react-native';
 import { PRIMARY_COLOR } from './constants';
 import { horizontalScale, verticalScale, moderateScale } from './metrics';
+import { hp, wp } from 'react-native-responsive-screen';
+
 
 const { width, height } = Dimensions.get('window');
 
@@ -50,7 +52,7 @@ export const textStyles = StyleSheet.create({
   },
   headerWhite : {
     color: 'white',
-    fontSize: 64,
+    fontSize: height * 0.07,
     fontFamily: 'OpenSans_400Regular',
   },
   text: {
