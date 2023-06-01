@@ -12,15 +12,14 @@ import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
 } from "react-native";
-import IconsContainer from "../../../components/Redirects/IconsContainer";
 import PrimaryButton from "../../../components/Buttons/PrimaryButton";
 import { AntDesign } from "@expo/vector-icons";
 import { viewStyles, textStyles, commonStyles } from "../../../styles";
-import DividerBlack from "../../../components/Visual/DividerBlack";
 import SignUpForm from "../../../components/Forms/SignUpForm";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { PRIMARY_COLOR } from "../../../constants";
 import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+import * as Haptics from "expo-haptics";
 
 
 
@@ -36,6 +35,11 @@ const SignUp = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+
+  const loginRedirect = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    navigation.navigate("Login");
+  };
 
   const headerHeight = useHeaderHeight();
 
@@ -106,9 +110,20 @@ const SignUp = ({ navigation }) => {
             ) : (
               <PrimaryButton disabled={true}>Sign up</PrimaryButton>
             )}
-            <Text style={[textStyles.text, { marginTop: 14 }]}>
-            Already have an account? <Text style={{ color: PRIMARY_COLOR, fontFamily: 'OpenSans_700Bold' }}>Log in</Text>
+            <TouchableOpacity
+          onPress={loginRedirect}
+          activeOpacity={0.8}
+          underlayColor={"#1B5F56"}
+        >
+          <Text style={[textStyles.text, { marginTop: 14 }]}>
+            Already have an account?{" "}
+            <Text
+              style={{ color: PRIMARY_COLOR, fontFamily: "OpenSans_700Bold" }}
+            >
+              Log in
+            </Text>
           </Text>
+        </TouchableOpacity>
           </View>
         </View>
       </TouchableWithoutFeedback>

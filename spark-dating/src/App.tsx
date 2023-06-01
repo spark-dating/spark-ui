@@ -1,25 +1,22 @@
 import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import { NavigationContainer } from '@react-navigation/native';
 
-
 import OnboardingStack from './stacks/OnboardingStack';
-import UserStack from './stacks/UserStack';
-
+import BottomTabNavigator from './components/Navigation/BottomTabNavigator';
 
 const App = () => {
   const user = null; // TODO: replace this with real authentication logic
   return (
     <NavigationContainer>
-      {/* {user ? <UserStack /> : <OnboardingStack />} */}
-      <OnboardingStack />
+      {/* {user ? <BottomTabNavigator /> : <OnboardingStack />} */}
+      <BottomTabNavigator />
     </NavigationContainer>
   );
 };
 
 export default App;
-
 
 const styles = StyleSheet.create({
   container: {
@@ -30,25 +27,3 @@ const styles = StyleSheet.create({
     marginTop: Constants.statusBarHeight,
   },
 });
-
-
-
-
-// use this for fonts 
-
-
-// import {
-//   useFonts,
-//   OpenSans_400Regular,
-//   OpenSans_700Bold,
-// } from '@expo-google-fonts/open-sans';
-// 
-// 
-// let [fontsLoaded] = useFonts({
-//   OpenSans_400Regular,
-//   OpenSans_700Bold,
-// });
-
-// if (!fontsLoaded) {
-//   return <Text>Loading...</Text>;
-// }

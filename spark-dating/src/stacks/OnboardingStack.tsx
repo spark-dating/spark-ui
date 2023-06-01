@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import OnboardingV2 from '../pages/Onboarding/Intro/OnboardingV2';
 import LoginScreen from '../pages/Onboarding/Login/LoginScreen';
 import PreSignUp from '../pages/Onboarding/Signup/PreSignUp';
-import ForgotPassword from '../components/Forms/ForgotPassword';
+import ForgotPassword from '../pages/Onboarding/Login/ForgotPassword';
 import SignUp from '../pages/Onboarding/Signup/SignUp';
 
 const Stack = createStackNavigator();
@@ -21,6 +21,7 @@ const OnboardingStack = () => (
     <Stack.Screen name="PreSignUp" component={PreSignUp} />
     <Stack.Screen name="ForgotPassword" component={ForgotPassword} />
     <Stack.Screen name="SignUp" component={SignUp} />
+    {/* Questionnaire starts here */}
 
   </Stack.Navigator>
 );
