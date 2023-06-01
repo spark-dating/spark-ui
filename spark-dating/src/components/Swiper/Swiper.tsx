@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, View, Image, Text, TouchableOpacity, Dimensions } from 'react-native';
 import Swiper from 'react-native-deck-swiper';
 
@@ -9,13 +9,14 @@ export default function SwiperComponent({ users }) {
   const [expandedUser, setExpandedUser] = useState(null);
 
   const renderCard = (card, index) => {
-    const { name } = card;
+    const { name, picture } = card;
     return (
       <TouchableOpacity
         onPress={() => setExpandedUser(card)}
         style={styles.card}
         key={index}
       >
+        <Image style={styles.cardImage} source={{ uri: picture.large }} />
         <Text style={styles.cardText}>{`${name.first} ${name.last}`}</Text>
       </TouchableOpacity>
     );
@@ -28,6 +29,7 @@ export default function SwiperComponent({ users }) {
           style={styles.expandedCard}
           onPress={() => setExpandedUser(null)}
         >
+          <Image style={styles.expandedImage} source={{ uri: expandedUser.picture.large }} />
           <Text style={styles.expandedText}>{`${expandedUser.name.first} ${expandedUser.name.last}`}</Text>
         </TouchableOpacity>
       )
@@ -36,11 +38,11 @@ export default function SwiperComponent({ users }) {
 
   return (
     <View style={styles.container}>
-      <Swiper
-        cards={users.results}
-        renderCard={renderCard}
-        infinite
-      />
+      {users && users.length > 0 ? (
+        <Swiper cards={users} renderCard={renderCard} infinite />
+      ) : (
+        <Text>No users found.</Text>
+      )}
       {renderExpandedUser()}
     </View>
   );
@@ -62,6 +64,10 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontSize: 50,
     backgroundColor: 'transparent',
+  },
+  cardImage: {
+    width: '100%',
+    height: '70%',
   },
   expandedCard: {
     position: 'absolute',

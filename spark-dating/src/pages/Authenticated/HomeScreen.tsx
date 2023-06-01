@@ -1,7 +1,12 @@
 import { View, Text, SafeAreaView, Alert, Button } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { viewStyles } from '../../styles';
 import axios from 'axios';
-import SwiperComponent from '../../components/Swiper/Swiper';
+import HomeComponent from '../../components/Swiper/HomeComponent';
+import { FlatList, Animated } from 'react-native';
+
+
+const AnimatedFlatList = Animated.createAnimatedComponent(FlatList);
 
 export default function HomeScreen() {
   const [users, setUsers] = useState([]);
@@ -13,14 +18,17 @@ export default function HomeScreen() {
         setUsers(res.data.results);
       })
       .catch(err => {
-        Alert.alert('Error getting users', err);
+        Alert.alert('Error getting users');
       });
   }, []);
 
+  
   return (
-    <SafeAreaView>
-      <Text>Home</Text>
-      {users.length > 0 && <SwiperComponent users={users} />}
+    <SafeAreaView style = {viewStyles.container}>
+      <HomeComponent data = {users}/>
+      {/* {users.map((user, index) => (
+        <Modules key={index} user={user} />
+      ))} */}
     </SafeAreaView>
   );
 }
