@@ -6,7 +6,7 @@ const MessagesStack = createStackNavigator();
 
 const MessagesStackNavigator = () => (
   <MessagesStack.Navigator screenOptions={{ headerShown: false }}>
-    <MessagesStack.Screen name="Messages" component={MessagesScreen} />
+    <MessagesStack.Screen name="MessagesStack" component={MessagesScreen} />
   </MessagesStack.Navigator>
 );
 

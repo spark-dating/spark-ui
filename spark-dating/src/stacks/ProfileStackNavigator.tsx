@@ -6,7 +6,7 @@ const ProfileStack = createStackNavigator();
 
 const ProfileStackNavigator = () => (
   <ProfileStack.Navigator screenOptions={{ headerShown: false }}>
-    <ProfileStack.Screen name="Profile" component={ProfileScreen} />
+    <ProfileStack.Screen name="ProfileStack" component={ProfileScreen} />
   </ProfileStack.Navigator>
 );
 

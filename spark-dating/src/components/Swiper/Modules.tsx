@@ -22,43 +22,59 @@ import {
   OpenSans_400Regular,
   OpenSans_700Bold,
 } from "@expo-google-fonts/open-sans";
-import Collapsible from "react-native-collapsible";
+import SwiperComponent from "./Swiper";
 
 type ModulesProps = {
-  viewableItems: Animated.SharedValue<ViewToken[]>;
   item: Array<any>;
+  index: number;
+  isPrimary: boolean;
+  setPrimaryIndex: (index: number) => void;
+  scrollToItem: (index: number) => void;
+  handleSwipe: (item: any) => void;
+  
 };
 
 const Modules: React.FC<ModulesProps> = React.memo(
-  ({ item, viewableItems }) => {
-    const [isCollapsed, setIsCollapsed] = useState(true);
-
+  ({ item, index, isPrimary, setPrimaryIndex, scrollToItem, handleSwipe }) => {
     const onPress = () => {
-      setIsCollapsed(!isCollapsed);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      if (isPrimary) {
+        // If this module is already primary, un-Primary it
+        setPrimaryIndex(null);
+      } else {
+        // Otherwise, make this module the primary one
+        scrollToItem(index);
+        setPrimaryIndex(index);
+      }
     };
 
-    const rStyle = useAnimatedStyle(() => {
-      const isVisible = Boolean(
-        viewableItems.value
-          .filter((item) => item.isViewable)
-          .find(
-            (viewableItem) => viewableItem.item.login.uuid === item.login.uuid
-          )
-      );
-      return {
-        opacity: withTiming(isVisible ? 1 : 0),
-        transform: [{ scale: withTiming(isVisible ? 1 : 0.6) }],
-      };
-    });
-
     return (
-      <TouchableOpacity onPress={onPress}>
-        <Collapsible collapsedHeight={styles.module.height} collapsed={isCollapsed}>
-          <Animated.View style={styles.moduleExpanded}>
-            <Text style={styles.moduleText}>{item.name.first}</Text>
-          </Animated.View>
-        </Collapsible>
-      </TouchableOpacity>
+      <View>
+        <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+          {!isPrimary ? (
+            <Animated.View style={styles.module}>
+              <View style={styles.moduleContent}>
+                <Text style={styles.moduleText}>{item.name.first}</Text>
+                <Image
+                  style={styles.moduleImage}
+                  source={{ uri: item.picture.thumbnail }}
+                />
+              </View>
+            </Animated.View>
+          ) : (
+            <Animated.View style={styles.moduleExpanded}>
+              {/* <View style={styles.moduleContentExpanded}>
+              <Text style={styles.moduleText}>{item.name.first}</Text>
+              <Image
+                style={styles.moduleImage}
+                source={{ uri: item.picture.thumbnail }}
+                />
+            </View> */}
+              <SwiperComponent user={item} onSwipe={() => handleSwipe(item)} />
+            </Animated.View>
+          )}
+        </TouchableOpacity>
+      </View>
     );
   }
 );
@@ -75,19 +91,33 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   moduleExpanded: {
-    width: wp("80%"),
+    alignSelf: "center",
+    width: wp("90%"),
     height: hp("80%"),
     backgroundColor: "black",
-    paddingBottom: hp("2%"),
+    marginBottom: hp("2%"),
     borderRadius: hp("1.875%"),
-    borderWidth: 1,
-    borderColor: "black",
+    // borderWidth: 1,
+    // borderColor: "black",
     overflow: "hidden",
   },
   moduleContent: {
-    height: "100%",
-    flexDirection: "row",
+    display: "flex",
+    justifyContent: "space-between",
     alignItems: "center",
+    flexDirection: "row",
+    height: "100%",
+    // alignSelf: "flex-end",
+    paddingHorizontal: wp("3%"),
+  },
+  moduleContentExpanded: {
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    flexDirection: "row",
+    height: "100%",
+    paddingTop: hp("3%"),
+    // alignSelf: "flex-end",
     paddingHorizontal: wp("3%"),
   },
   moduleImage: {
@@ -98,7 +128,7 @@ const styles = StyleSheet.create({
   },
   moduleText: {
     color: "white",
-    fontSize: hp("2.5s%"),
+    fontSize: hp("2.5%"),
     fontFamily: "OpenSans_700Bold",
   },
 });

@@ -6,7 +6,7 @@ const LikesStack = createStackNavigator();
 
 const LikesStackNavigator = () => (
   <LikesStack.Navigator screenOptions={{ headerShown: false }}>
-    <LikesStack.Screen name="Likes" component={LikesScreen} />
+    <LikesStack.Screen name="LikesStack" component={LikesScreen} />
   </LikesStack.Navigator>
 );
 
