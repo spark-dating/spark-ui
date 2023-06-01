@@ -1,5 +1,8 @@
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+
+
 import {
   useFonts,
   OpenSans_400Regular
@@ -27,16 +30,17 @@ const styles = StyleSheet.create({
   },
   line: {
     flex: 1,
-    height: 0.4,
+    height: hp('0.05%'),
     backgroundColor: '#CDD1D0',
     opacity: 1,
   },
   text: {
-    paddingHorizontal: 8,
-    fontSize: 16,
+    paddingHorizontal: wp('2%'),
+    fontSize: hp('2%'),
     fontFamily: 'OpenSans_400Regular',
     color: '#797C7B',
   },
 });
+
 
 export default DividerBlack;

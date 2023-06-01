@@ -1,5 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
+
 import {
   useFonts,
   OpenSans_700Bold,
@@ -27,14 +29,14 @@ const styles = StyleSheet.create({
   },
   line: {
     flex: 1,
-    height: 0.4,
+    height: hp('0.05%'),
     color: '#CDD1D0',
     opacity: 0.3,
     backgroundColor: 'white',
   },
   text: {
-    paddingHorizontal: 8,
-    fontSize: 16,
+    paddingHorizontal: wp('2%'),
+    fontSize: hp('2%'),
     fontFamily: 'OpenSans_700Bold',
     color: 'white',
   },
