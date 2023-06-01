@@ -20,7 +20,11 @@ export default function HomeScreen() {
 
   return (
     <View style={viewStyles.container}>
+      {users && users.length > 0 ? 
       <HomeComponent data={users} />
+      :
+        <Text>Loading...</Text>
+      }
     </View>
   );
 }

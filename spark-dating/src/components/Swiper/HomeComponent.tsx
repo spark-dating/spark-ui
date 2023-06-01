@@ -1,9 +1,12 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { View, Text, FlatList, ViewToken } from "react-native";
 import { viewStyles } from "../../styles";
 import Modules from "./Modules";
 import Animated, { useSharedValue } from "react-native-reanimated";
-import { heightPercentageToDP as hp, widthPercentageToDP as wp} from "react-native-responsive-screen";
+import {
+  heightPercentageToDP as hp,
+  widthPercentageToDP as wp,
+} from "react-native-responsive-screen";
 
 interface HomeComponentProps {
   data: Array<any>;
@@ -13,7 +16,6 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
   const [primaryIndex, setPrimaryIndex] = useState<number | null>(null);
   const [users, setUsers] = useState(data);
 
-
   const viewableItems = useSharedValue<ViewToken[]>([]);
   const flatListRef = useRef<FlatList>(null);
 
@@ -22,13 +24,17 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
   });
 
   const handleSwipe = (item) => {
-    setUsers(users.filter(user => user !== item));
+    setUsers(users.filter((user) => user !== item));
   };
+
+  // useEffect(() => {
+  //   flatListRef.current?.scrollToOffset({ offset:  });
+  // }
+  // , []);
 
   const scrollToItem = (index: number) => {
     setTimeout(() => {
-      flatListRef.current?.scrollToIndex({ index, 
-      viewOffset: hp('5.5%') });
+      flatListRef.current?.scrollToIndex({ index, viewOffset: hp("5.5%") });
     }, 50);
   };
 
@@ -42,6 +48,9 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
         contentContainerStyle={{ paddingTop: 10 }}
         keyExtractor={(item, index) => `${index}-${item.name.first}`} // Provide a unique key using item and index
         onViewableItemsChanged={onViewableItemsChanged.current}
+        // scrollIndicatorInsets={{top: hp("10%")}}
+        contentOffset={{y: hp("-4%")}}
+        contentInset={{ top: hp("4%") }}
         renderItem={({ item, index }) => (
           <Modules
             key={index}

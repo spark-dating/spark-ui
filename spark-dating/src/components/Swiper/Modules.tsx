@@ -23,6 +23,7 @@ import {
   OpenSans_700Bold,
 } from "@expo-google-fonts/open-sans";
 import SwiperComponent from "./Swiper";
+import { PRIMARY_COLOR } from "../../constants";
 
 type ModulesProps = {
   item: Array<any>;
@@ -31,11 +32,21 @@ type ModulesProps = {
   setPrimaryIndex: (index: number) => void;
   scrollToItem: (index: number) => void;
   handleSwipe: (item: any) => void;
-  
+
 };
 
 const Modules: React.FC<ModulesProps> = React.memo(
   ({ item, index, isPrimary, setPrimaryIndex, scrollToItem, handleSwipe }) => {
+
+
+    const handleSwipeAction = (item) => {
+      handleSwipe(item);
+      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+      setPrimaryIndex(null);
+
+    };
+
+
     const onPress = () => {
       LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
       if (isPrimary) {
@@ -70,7 +81,7 @@ const Modules: React.FC<ModulesProps> = React.memo(
                 source={{ uri: item.picture.thumbnail }}
                 />
             </View> */}
-              <SwiperComponent user={item} onSwipe={() => handleSwipe(item)} />
+              <SwiperComponent onPress={onPress} user={item} onSwipe={() => handleSwipeAction(item)} />
             </Animated.View>
           )}
         </TouchableOpacity>
@@ -83,11 +94,11 @@ const styles = StyleSheet.create({
   module: {
     width: wp("80%"),
     height: hp("10%"),
-    backgroundColor: "black",
+    backgroundColor: PRIMARY_COLOR,
     marginBottom: hp("2%"),
     borderRadius: hp("1.875%"),
-    borderWidth: 1,
-    borderColor: "black",
+    // borderWidth: 1,
+    // borderColor: "black",
     overflow: "hidden",
   },
   moduleExpanded: {
