@@ -49,8 +49,8 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
         keyExtractor={(item, index) => `${index}-${item.name.first}`} // Provide a unique key using item and index
         onViewableItemsChanged={onViewableItemsChanged.current}
         // scrollIndicatorInsets={{top: hp("10%")}}
-        contentOffset={{y: hp("-4%")}}
-        contentInset={{ top: hp("4%") }}
+        contentInset={{ top: hp("5%") }}
+        contentOffset={{ x: 0, y: -hp("5%") }}
         renderItem={({ item, index }) => (
           <Modules
             key={index}
