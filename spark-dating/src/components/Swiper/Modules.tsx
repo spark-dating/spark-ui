@@ -1,27 +1,8 @@
 import React, { useState } from "react";
-import { textStyles, viewStyles } from "../../styles";
-import {
-  StyleSheet,
-  View,
-  Image,
-  Text,
-  TouchableOpacity,
-  LayoutAnimation,
-  ViewToken,
-} from "react-native";
-import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
-} from "react-native-responsive-screen";
-import Animated, {
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated";
-import {
-  useFonts,
-  OpenSans_400Regular,
-  OpenSans_700Bold,
-} from "@expo-google-fonts/open-sans";
+import { StyleSheet, View, ImageBackground, Text, TouchableOpacity, LayoutAnimation } from "react-native";
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from "react-native-responsive-screen";
+import Animated from "react-native-reanimated";
+import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
 import SwiperComponent from "./Swiper";
 import { PRIMARY_COLOR } from "../../constants";
 
@@ -32,74 +13,79 @@ type ModulesProps = {
   setPrimaryIndex: (index: number) => void;
   scrollToItem: (index: number) => void;
   handleSwipe: (item: any) => void;
-
+  setScrollEnabled: (enabled: boolean) => void;
 };
 
-const Modules: React.FC<ModulesProps> = React.memo(
-  ({ item, index, isPrimary, setPrimaryIndex, scrollToItem, handleSwipe }) => {
+const Modules: React.FC<ModulesProps> = React.memo(({ item, index, isPrimary, setPrimaryIndex, scrollToItem, handleSwipe, setScrollEnabled }) => {
+
+  const [fontsLoaded] = useFonts({
+    OpenSans_400Regular,
+    OpenSans_700Bold,
+  });
 
 
-    const handleSwipeAction = (item) => {
-      handleSwipe(item);
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+  const handleSwipeAction = (item) => {
+    handleSwipe(item);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    setPrimaryIndex(null);
+    setScrollEnabled(true);
+  };
+
+  const onPress = () => {
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    if (isPrimary) {
       setPrimaryIndex(null);
+      setScrollEnabled(true);
+    } else {
+      scrollToItem(index);
+      setPrimaryIndex(index);
+      setScrollEnabled(false);
+    }
+  };
 
-    };
-
-
-    const onPress = () => {
-      LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-      if (isPrimary) {
-        // If this module is already primary, un-Primary it
-        setPrimaryIndex(null);
-      } else {
-        // Otherwise, make this module the primary one
-        scrollToItem(index);
-        setPrimaryIndex(index);
-      }
-    };
-
-    return (
-      <View>
-        <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
-          {!isPrimary ? (
-            <Animated.View style={styles.module}>
-              <View style={styles.moduleContent}>
-                <Text style={styles.moduleText}>{item.name.first}</Text>
-                <Image
-                  style={styles.moduleImage}
-                  source={{ uri: item.picture.thumbnail }}
-                />
-              </View>
-            </Animated.View>
-          ) : (
-            <Animated.View style={styles.moduleExpanded}>
-              {/* <View style={styles.moduleContentExpanded}>
+  return (
+    <TouchableOpacity activeOpacity={0.8} onPress={onPress}>
+      {!isPrimary ? (
+        <ImageBackground style={styles.module} source={{ uri: item.picture.large }}>
+          <View style={styles.overlay} />
+          <View style={styles.locationContainer}>
+            <View style={styles.locationBox}>
+              <Text style={styles.locationText}>{item.location.city}</Text>
+            </View>
+            <View style={styles.nameBox}>
               <Text style={styles.moduleText}>{item.name.first}</Text>
-              <Image
-                style={styles.moduleImage}
-                source={{ uri: item.picture.thumbnail }}
-                />
-            </View> */}
-              <SwiperComponent onPress={onPress} user={item} onSwipe={() => handleSwipeAction(item)} />
-            </Animated.View>
-          )}
-        </TouchableOpacity>
-      </View>
-    );
-  }
-);
+            </View>
+          </View>
+        </ImageBackground>
+      ) : (
+        <Animated.View style={styles.moduleExpanded}>
+          <SwiperComponent onPress={onPress} user={item} onSwipe={() => handleSwipeAction(item)} />
+        </Animated.View>
+      )}
+    </TouchableOpacity>
+  );
+});
 
 const styles = StyleSheet.create({
   module: {
     width: wp("80%"),
     height: hp("10%"),
-    backgroundColor: PRIMARY_COLOR,
     marginBottom: hp("2%"),
     borderRadius: hp("1.875%"),
-    // borderWidth: 1,
-    // borderColor: "black",
     overflow: "hidden",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative"
+  },
+  overlay: {
+    backgroundColor: "black",
+    opacity: 0.5,
+    position: "absolute",
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderRadius: hp("1.875%")
   },
   moduleExpanded: {
     alignSelf: "center",
@@ -108,40 +94,40 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     marginBottom: hp("2%"),
     borderRadius: hp("1.875%"),
-    // borderWidth: 1,
-    // borderColor: "black",
     overflow: "hidden",
   },
-  moduleContent: {
-    display: "flex",
-    justifyContent: "space-between",
+  locationContainer: {
+    flexDirection: "row",
     alignItems: "center",
-    flexDirection: "row",
-    height: "100%",
-    // alignSelf: "flex-end",
-    paddingHorizontal: wp("3%"),
+    justifyContent: "flex-start",
+    position: "absolute",
+    left: wp("3%"),
+    zIndex: 1
   },
-  moduleContentExpanded: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-    flexDirection: "row",
-    height: "100%",
-    paddingTop: hp("3%"),
-    // alignSelf: "flex-end",
-    paddingHorizontal: wp("3%"),
+  locationBox: {
+    backgroundColor: "rgba(128, 128, 128, 0.75)",
+    borderRadius: hp("1%"),
+    padding: wp("1%"),
+    alignSelf: 'flex-start',
+    maxWidth: wp("27%"),
+    maxHeight: hp("7%"),
   },
-  moduleImage: {
-    width: hp("6%"),
-    height: hp("6%"),
-    borderRadius: hp("3%"),
-    marginRight: wp("3%"),
+  nameBox: {
+    position: "absolute",
+    left: wp('30%'),
+    zIndex: 1
   },
   moduleText: {
     color: "white",
     fontSize: hp("2.5%"),
     fontFamily: "OpenSans_700Bold",
   },
+  locationText: {
+    color: "white",
+    fontSize: hp("2%"),
+    fontFamily: "OpenSans_700Bold"
+  }
 });
+
 
 export default Modules;

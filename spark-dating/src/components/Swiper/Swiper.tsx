@@ -6,10 +6,23 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 import { PRIMARY_COLOR } from "../../constants";
+import { useFonts, OpenSans_400Regular, OpenSans_700Bold } from "@expo-google-fonts/open-sans";
 
-export default function SwiperComponent({ user, onSwipe, onPress }) {
+interface SwiperComponentProps {
+  user: any;
+  onSwipe: (index: number) => void;
+  onPress: () => void;
+}
+
+const SwiperComponent: React.FC<SwiperComponentProps> = ({user, onSwipe, onPress}) => {
   const { name, picture } = user;
+  const [fontsLoaded] = useFonts({
+    OpenSans_400Regular,
+    OpenSans_700Bold,
+  });
+
   return (
+    
     <Swiper
       cards={[user]}
       stackSeparation={0}
@@ -22,29 +35,36 @@ export default function SwiperComponent({ user, onSwipe, onPress }) {
           <TouchableOpacity activeOpacity={0.8}  onPress={onPress}>
             <Image
               style={styles.cardImage}
-              source={{ uri: picture.thumbnail }}
+              source={{ uri: picture.large }}
               />
               </TouchableOpacity>
             <Text style={styles.cardText}>{`${name.first} ${name.last}`}</Text>
-          </View>
-      )}
-      onSwiped={onSwipe}
-      infinite={false}
-      {...styles.card}
-    />
+            </View>
+            )}
+            onSwiped={onSwipe}
+            infinite={false}
+            {...styles.card}
+      />
   );
 }
 
+export default SwiperComponent;
+
 const styles = StyleSheet.create({
   container: {
+    
     flex: 1,
   },
   card: {
+    fontFamily: "OpenSans_400Regular",
+    borderWidth: 3,
+    borderColor: 'red',
+    height: '100%',
+    width: '100%',
     flex: 1,
     borderRadius: wp("2%"),
     // borderWidth: 1,
-    overflow: "hidden",
-    borderColor: PRIMARY_COLOR,
+    overflow: "visible",
     justifyContent: "center",
     backgroundColor: "white",
   },

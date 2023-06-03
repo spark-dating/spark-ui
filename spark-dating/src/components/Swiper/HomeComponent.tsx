@@ -15,6 +15,8 @@ interface HomeComponentProps {
 const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
   const [primaryIndex, setPrimaryIndex] = useState<number | null>(null);
   const [users, setUsers] = useState(data);
+  const [scrollEnabled, setScrollEnabled] = useState(true);
+
 
   const viewableItems = useSharedValue<ViewToken[]>([]);
   const flatListRef = useRef<FlatList>(null);
@@ -25,12 +27,9 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
 
   const handleSwipe = (item) => {
     setUsers(users.filter((user) => user !== item));
+
   };
 
-  // useEffect(() => {
-  //   flatListRef.current?.scrollToOffset({ offset:  });
-  // }
-  // , []);
 
   const scrollToItem = (index: number) => {
     setTimeout(() => {
@@ -46,9 +45,8 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
         ref={flatListRef}
         data={users}
         contentContainerStyle={{ paddingTop: 10 }}
-        keyExtractor={(item, index) => `${index}-${item.name.first}`} // Provide a unique key using item and index
+        keyExtractor={(item, index) => `${index}-${item.name.first}`}
         onViewableItemsChanged={onViewableItemsChanged.current}
-        // scrollIndicatorInsets={{top: hp("10%")}}
         contentInset={{ top: hp("5%") }}
         contentOffset={{ x: 0, y: -hp("5%") }}
         renderItem={({ item, index }) => (
@@ -58,11 +56,13 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
             index={index}
             viewableItems={viewableItems}
             isPrimary={index === primaryIndex}
-            setPrimaryIndex={setPrimaryIndex}
+            setPrimaryIndex={setPrimaryIndex} 
             scrollToItem={scrollToItem}
-            handleSwipe={handleSwipe} // pass down the new swipe handler function
-          />
-        )}
+            handleSwipe={handleSwipe}
+            setScrollEnabled={setScrollEnabled}
+            />
+            )}
+            scrollEnabled={scrollEnabled}
       />
     </View>
   );
