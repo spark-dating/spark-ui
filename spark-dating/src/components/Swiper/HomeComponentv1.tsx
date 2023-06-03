@@ -1,6 +1,7 @@
 import { View, Text, FlatList, Animated } from "react-native";
 import React from "react";
 import Modules from "./Modules";
+import Swiper from "react-native-deck-swiper";
 
 
 interface HomeComponentProps {

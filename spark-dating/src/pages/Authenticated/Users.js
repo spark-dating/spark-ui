@@ -98,9 +98,9 @@ const users = [
     {
       "gender": "female",
       "name": {
-        "title": "Miss",
-        "first": "Olivia",
-        "last": "Anderson"
+        "title": "Mr",
+        "first": "DJ",
+        "last": "Khaled"
       },
       "location": {
         "street": {
@@ -116,7 +116,7 @@ const users = [
         "username": "yellowbutterfly345"
       },
       "picture": {
-        "large": "https://images.unsplash.com/photo-1560087637-bf797bc7796a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80"
+        "large": "https://i.discogs.com/tPNtpU-kGt9EY2icxms_2aMMDN9ozSaNzHMW0PL_zSk/rs:fit/g:sm/q:90/h:747/w:600/czM6Ly9kaXNjb2dz/LWRhdGFiYXNlLWlt/YWdlcy9BLTI0MTUx/My0xNjMyMTI0MTQ3/LTk0NzQuanBlZw.jpeg"
       }
     },
     {
@@ -140,7 +140,7 @@ const users = [
         "username": "greensky123"
       },
       "picture": {
-        "large": "https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1361&q=80"
+        "large": "https://images.unsplash.com/photo-1560087637-bf797bc7796a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1287&q=80"
       }
     },
     {
