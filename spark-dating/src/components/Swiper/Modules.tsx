@@ -19,7 +19,7 @@ import {
 } from "@expo-google-fonts/open-sans";
 import SwiperComponent from "./Swiper";
 import { PRIMARY_COLOR } from "../../constants";
-import Swiper from "react-native-deck-swiper";
+import ScrollViewCard from "./ScrollViewCard";
 
 type ModulesProps = {
   item: Array<any>;
@@ -29,6 +29,9 @@ type ModulesProps = {
   scrollToItem: (index: number) => void;
   handleSwipe: (item: any) => void;
   setScrollEnabled: (enabled: boolean) => void;
+  handleLike: (item: any) => void;
+  handleDislike: (item: any) => void;
+  handleSuperlike: (item: any) => void;
 };
 
 const Modules: React.FC<ModulesProps> = React.memo(
@@ -40,6 +43,9 @@ const Modules: React.FC<ModulesProps> = React.memo(
     scrollToItem,
     handleSwipe,
     setScrollEnabled,
+    handleLike,
+    handleDislike,
+    handleSuperlike,
   }) => {
     const [fontsLoaded] = useFonts({
       OpenSans_400Regular,
@@ -90,13 +96,14 @@ const Modules: React.FC<ModulesProps> = React.memo(
           </TouchableOpacity>
         ) : (
           <Animated.View style={styles.moduleExpanded}>
-            
-            <SwiperComponent
-                    onPress={onPress}
-                    user={item}
-                    onSwipe={() => handleSwipeAction(item)}
-                  />
-              
+            <ScrollViewCard
+              user={item}
+              onPress={onPress}
+              handleSwipeAction={handleSwipeAction}
+              handleLike={handleLike}
+              handleDislike={handleDislike}
+              handleSuperlike={handleSuperlike}
+            />
           </Animated.View>
         )}
       </>
@@ -127,9 +134,9 @@ const styles = StyleSheet.create({
   },
   moduleExpanded: {
     alignSelf: "center",
-    width: wp("90%"),
+    width: wp("100%"),
     height: hp("80%"),
-    backgroundColor: "lightgrey",
+    backgroundColor: "transparent",
     marginBottom: hp("2%"),
     borderRadius: hp("1.875%"),
     overflow: "hidden",

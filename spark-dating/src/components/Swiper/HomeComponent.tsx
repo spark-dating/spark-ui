@@ -10,9 +10,12 @@ import {
 
 interface HomeComponentProps {
   data: Array<any>;
+  handleLike: (item: any) => void;
+  handleDislike: (item: any) => void;
+  handleSuperlike: (item: any) => void;
 }
 
-const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
+const HomeComponent: React.FC<HomeComponentProps> = ({ data, handleLike, handleDislike, handleSuperlike}) => {
   const [primaryIndex, setPrimaryIndex] = useState<number | null>(null);
   const [users, setUsers] = useState(data);
   const [scrollEnabled, setScrollEnabled] = useState(true);
@@ -60,6 +63,9 @@ const HomeComponent: React.FC<HomeComponentProps> = ({ data }) => {
             scrollToItem={scrollToItem}
             handleSwipe={handleSwipe}
             setScrollEnabled={setScrollEnabled}
+            handleLike={handleLike}
+            handleDislike={handleDislike}
+            handleSuperlike={handleSuperlike}
             />
             )}
             scrollEnabled={scrollEnabled}

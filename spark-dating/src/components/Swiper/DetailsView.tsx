@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { heightPercentageToDP as hp, widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
 interface DetailsViewProps {
   name: string;
@@ -15,15 +16,17 @@ const DetailsView: React.FC<DetailsViewProps> = ({ name, location }) => (
 
 const styles = StyleSheet.create({
   container: {
-    
-    padding: 10,
+    paddingHorizontal: wp('5%'),
+    backgroundColor: 'white',
+    borderRadius: wp('8%'),
+    paddingTop: hp('8%'),
   },
   name: {
-    fontSize: 24,
+    fontSize: hp('3%'),
     fontWeight: 'bold',
   },
   location: {
-    fontSize: 18,
+    fontSize: hp('2%'),
     color: 'gray',
   },
 });
