@@ -32,7 +32,6 @@ interface ScrollViewCardProps {
 
 
 
-
 const ScrollViewCard: React.FC<ScrollViewCardProps> = ({
   user,
   onPress,
@@ -46,7 +45,12 @@ const ScrollViewCard: React.FC<ScrollViewCardProps> = ({
     <ProfilePicture imageUri={user.picture.large} />
   </TouchableOpacity>
   <View style={styles.container}>
-  <ActionButtons />
+  <ActionButtons
+  handleSwipeAction = {handleSwipeAction}
+  handleDislike = {handleDislike}
+  handleLike = {handleLike}
+  handleSuperlike = {handleSuperlike}
+  />
 
   <DetailsView
     name={`${user.name.first} ${user.name.last}`}

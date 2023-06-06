@@ -1,41 +1,75 @@
-import React from 'react';
-import { View, TouchableOpacity, StyleSheet, Platform } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { PRIMARY_COLOR } from '../../constants';
+import React from "react";
+import { View, TouchableOpacity, StyleSheet, Platform } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { PRIMARY_COLOR } from "../../constants";
 import {
   heightPercentageToDP as hp,
   widthPercentageToDP as wp,
-} from 'react-native-responsive-screen';
+} from "react-native-responsive-screen";
+import * as Haptics from "expo-haptics";
 
-const ActionButtons = () => {
-  const handleLike = () => {
-    console.log('Liked!');
-    // add your like logic here
+
+const ActionButtons = ({
+  handleDislike,
+  handleLike,
+  handleSuperLike,
+  handleSwipeAction,
+}) => {
+  const handleLocalLike = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    handleLike();
   };
 
-  const handleDislike = () => {
-    console.log('Disliked!');
-    // add your dislike logic here
+  const handleLocalDislike = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    handleDislike();
   };
 
-  const handleSuperLike = () => {
-    console.log('Super Liked!');
-    // add your super like logic here
+  const handleLocalSuperLike = () => {
+    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    handleSuperLike();
   };
 
   return (
     <View style={styles.container}>
-      <TouchableOpacity activeOpacity={0.8} style={[styles.buttonSide, styles.shadow]} onPress={handleDislike}>
-        <MaterialCommunityIcons name="close" size={hp('4%')} color="red" style={styles.icon} />      
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[styles.buttonSide, styles.shadow]}
+        onPress={handleLocalLike}
+      >
+        <MaterialCommunityIcons
+          name="close"
+          size={hp("4%")}
+          color="red"
+          style={styles.icon}
+        />
       </TouchableOpacity>
 
-      <TouchableOpacity activeOpacity={0.8} style={[styles.buttonCenter, styles.shadow]} onPress={handleLike}>
-        <MaterialCommunityIcons name="heart" size={hp('7%')} color="white" style={styles.icon} />
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[styles.buttonCenter, styles.shadow]}
+        onPress={handleLocalDislike}
+      >
+        <MaterialCommunityIcons
+          name="heart"
+          size={hp("7%")}
+          color="white"
+          style={styles.icon}
+        />
       </TouchableOpacity>
 
-      <TouchableOpacity activeOpacity={0.8} style={[styles.buttonSide, styles.shadow]} onPress={handleSuperLike}>
-        <Ionicons name="star" size={hp('4%')} color="purple" style={styles.icon} />
+      <TouchableOpacity
+        activeOpacity={0.8}
+        style={[styles.buttonSide, styles.shadow]}
+        onPress={handleLocalSuperLike}
+      >
+        <Ionicons
+          name="star"
+          size={hp("4%")}
+          color="purple"
+          style={styles.icon}
+        />
       </TouchableOpacity>
     </View>
   );
@@ -43,37 +77,36 @@ const ActionButtons = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: wp('2%'),
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: wp("2%"),
+    alignItems: "center",
     // position: 'absolute',
-    bottom: hp('0%'),
-    width: wp('100%'),
-    alignSelf: 'center',
-    marginBottom: -hp('6%'),
+    bottom: hp("0%"),
+    width: wp("100%"),
+    alignSelf: "center",
+    marginBottom: -hp("6%"),
     zIndex: 1,
   },
   buttonSide: {
-    display: 'flex',
-    backgroundColor: 'white',
-    width: hp('9%'),
-    height: hp('9%'),
+    display: "flex",
+    backgroundColor: "white",
+    width: hp("9%"),
+    height: hp("9%"),
     borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonCenter: {
     backgroundColor: PRIMARY_COLOR,
-    width: hp('12%'),
-    height: hp('12%'),
+    width: hp("12%"),
+    height: hp("12%"),
     borderRadius: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    
+    alignItems: "center",
+    justifyContent: "center",
   },
   icon: {
-    textAlign: 'center',
+    textAlign: "center",
   },
   shadow: {
     ...Platform.select({
@@ -82,7 +115,7 @@ const styles = StyleSheet.create({
           width: 0,
           height: 3,
         },
-        shadowColor: 'rgba(0, 0, 0, 0.5)',
+        shadowColor: "rgba(0, 0, 0, 0.5)",
         shadowOpacity: 0.5,
         shadowRadius: 6,
       },
